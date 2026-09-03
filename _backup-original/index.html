@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Infinity System | Monitoramento e Automação Remota by Refrisat</title>
+  <meta name="description" content="Infinity System by Refrisat: monitoramento em tempo real, automação remota, gestão energética e inteligência operacional para chillers e equipamentos industriais." />
+  <meta name="theme-color" content="#06172e" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Infinity System by Refrisat" />
+  <meta property="og:description" content="Seu processo industrial sob controle. De qualquer lugar." />
+  <meta property="og:image" content="assets/og-infinity.png" />
+  <meta property="og:locale" content="pt_BR" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="site-header" id="inicio">
+    <div class="container nav-wrap">
+      <a class="brand" href="#inicio" aria-label="Infinity System - início">
+        <img src="assets/infinity-logo.png" alt="Infinity System" />
+        <span class="brand-by">by <strong>REFRISAT</strong></span>
+      </a>
+
+      <button class="menu-toggle" aria-controls="menu-principal" aria-expanded="false" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav id="menu-principal" class="nav" aria-label="Navegação principal">
+        <a href="#infinity">O Infinity</a>
+        <a href="#recursos">Recursos</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#aplicacoes">Aplicações</a>
+        <a href="#planos">Planos</a>
+      </nav>
+
+      <a class="btn btn-primary header-cta js-cta" data-cta="header" href="#contato">Falar com um especialista</a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero section-dark">
+      <div class="hero-grid container">
+        <div class="hero-copy reveal">
+          <div class="eyebrow-pill">Equipamento inteligente padrão de fábrica</div>
+          <h1>Seu processo industrial <span>sob controle. De qualquer lugar.</span></h1>
+          <p class="hero-lead">Monitoramento em tempo real, automação remota e inteligência operacional para transformar dados dos seus equipamentos em decisões mais rápidas, seguras e eficientes.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#infinity">Conheça o Infinity</a>
+            <a class="btn btn-outline-light js-cta" data-cta="hero" href="#contato">Falar com um especialista</a>
+          </div>
+          <div class="hero-proof" aria-label="Principais recursos">
+            <div><span class="mini-icon">24/7</span><strong>Monitoramento<br />24/7</strong></div>
+            <div><span class="mini-icon cloud-icon">☁</span><strong>Acesso<br />em nuvem</strong></div>
+            <div><span class="mini-icon sliders-icon">≡</span><strong>Automação<br />remota</strong></div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" aria-label="Chiller conectado ao painel Infinity">
+          <div class="mesh mesh-a"></div>
+          <div class="mesh mesh-b"></div>
+          <div class="dashboard-shell">
+            <img src="assets/dashboard-main.png" alt="Tela real da plataforma Infinity mostrando variáveis críticas, alertas e histórico" />
+          </div>
+          <img class="chiller-hero" src="assets/chiller.png" alt="Chiller industrial Refrisat" />
+          <div class="metric-card metric-1"><span>Temperatura</span><strong>17,9 °C</strong></div>
+          <div class="metric-card metric-2"><span>Vazão</span><strong>23,1 m³/h</strong></div>
+          <div class="metric-card metric-3"><span>Set point</span><strong>18,0 °C</strong></div>
+          <div class="metric-card metric-4"><span>Potência</span><strong>42,8 kW</strong></div>
+          <div class="hero-floor"></div>
+        </div>
+      </div>
+      <div class="hero-bottom-glow"></div>
+    </section>
+
+    <section id="infinity" class="section variables-section">
+      <div class="container variable-layout">
+        <div class="section-copy reveal">
+          <span class="kicker">Infinitas variáveis. Infinitas possibilidades.</span>
+          <h2>Dados que antes ficavam dentro do equipamento agora trabalham a favor da sua operação.</h2>
+          <p>O Infinity transforma variáveis do processo em informações acessíveis para operação, manutenção e gestão.</p>
+        </div>
+
+        <div class="variable-map reveal" aria-label="Variáveis conectadas ao Infinity">
+          <div class="variable-node v-temp"><span class="node-icon">°C</span><b>Temperatura</b><small>18,4 °C</small></div>
+          <div class="variable-node v-flow"><span class="node-icon">↝</span><b>Vazão</b><small>23,1 m³/h</small></div>
+          <div class="variable-node v-pressure"><span class="node-icon">P</span><b>Pressão</b><small>4,8 bar</small></div>
+          <div class="variable-center"><img src="assets/favicon.png" alt="Símbolo Infinity" /></div>
+          <div class="variable-node v-energy"><span class="node-icon energy">⚡</span><b>Energia</b><small>42,8 kW</small></div>
+          <div class="variable-node v-status"><span class="node-icon ok">✓</span><b>Status</b><small>OPERANDO</small></div>
+          <div class="variable-node v-alarm"><span class="node-icon">!</span><b>Alarmes</b><small>0 ativos</small></div>
+          <svg class="variable-lines" viewBox="0 0 900 280" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M80,88 C180,120 300,130 430,150" />
+            <path d="M210,50 C280,100 340,120 430,150" />
+            <path d="M340,85 C380,115 395,130 430,150" />
+            <path d="M820,88 C720,120 600,130 470,150" />
+            <path d="M690,50 C620,100 560,120 470,150" />
+            <path d="M560,85 C520,115 505,130 470,150" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="section proximity-section">
+      <div class="container proximity-card reveal">
+        <div class="proximity-visual" aria-hidden="true">
+          <div class="device-box"><img src="assets/chiller.png" alt="" /></div>
+          <div class="cloud-box"><img src="assets/favicon.png" alt="" /><span>Infinity Cloud</span></div>
+          <div class="people-box">
+            <div class="person">CLIENTE</div>
+            <div class="screen-mini"></div>
+            <div class="person">SERVIÇOS REFRISAT</div>
+          </div>
+          <svg viewBox="0 0 600 300" class="proximity-lines" aria-hidden="true">
+            <path d="M150 130 C190 60 250 55 300 72" />
+            <path d="M300 88 C320 130 330 175 315 220" />
+            <path d="M470 130 C430 60 370 55 320 72" />
+          </svg>
+        </div>
+        <div class="proximity-copy">
+          <span class="kicker">Inteligência que já nasce com o equipamento</span>
+          <h2>Monitoramento e automação remota como recurso padrão.</h2>
+          <p>Nos chillers Refrisat, o Infinity amplia a visibilidade da operação desde o início. A equipe de Serviços pode acompanhar o comportamento do equipamento, apoiando análises, suporte e identificação de situações que merecem atenção.</p>
+          <div class="inline-benefits">
+            <span><b>24/7</b> acompanhamento</span>
+            <span><b>∞</b> proximidade digital</span>
+            <span><b>✓</b> suporte mais ágil</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="recursos" class="section features-section">
+      <div class="container">
+        <div class="section-heading center reveal">
+          <span class="kicker">Mais do que visualizar dados</span>
+          <h2>Interaja com a sua operação.</h2>
+          <p>Recursos para acompanhar, analisar e agir com mais informação.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card reveal"><div class="feature-icon">◫</div><h3>Monitoramento em tempo real</h3><p>Acompanhe as principais variáveis do equipamento no momento em que acontecem.</p></article>
+          <article class="feature-card reveal"><div class="feature-icon">♢</div><h3>Alertas e notificações</h3><p>Receba informações automáticas sobre condições e eventos que merecem atenção.</p></article>
+          <article class="feature-card reveal"><div class="feature-icon">≡</div><h3>Automação remota</h3><p>Mediante controle autorizado, ligue, desligue e altere o set-point remotamente.</p></article>
+          <article class="feature-card reveal"><div class="feature-icon">↗</div><h3>Dashboards e históricos</h3><p>Visualize gráficos, tendências e históricos para compreender melhor o processo.</p></article>
+          <article class="feature-card reveal"><div class="feature-icon">⚡</div><h3>Gestão energética</h3><p>Acompanhe variáveis elétricas e indicadores de consumo para apoiar decisões.</p></article>
+          <article class="feature-card reveal"><div class="feature-icon">☁</div><h3>Acesso em nuvem</h3><p>Consulte seus equipamentos pela plataforma em computador ou dispositivo móvel.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="tempo-real" class="section realtime-section section-dark">
+      <div class="container realtime-grid">
+        <div class="realtime-copy reveal">
+          <span class="kicker kicker-light">Tempo real. De verdade.</span>
+          <h2>Quando algo acontece no equipamento, você vê.</h2>
+          <p>Dados instantâneos dão visibilidade do comportamento da operação sem depender apenas da periodicidade de gravação histórica.</p>
+          <ul class="metric-list">
+            <li>Temperatura de retorno</li>
+            <li>Temperatura de resfriamento</li>
+            <li>Vazão</li>
+            <li>Capacidade térmica</li>
+            <li>Temperatura ambiente</li>
+          </ul>
+        </div>
+        <div class="realtime-screen reveal">
+          <img src="assets/dashboard-main.png" alt="Dashboard real do Infinity System" />
+        </div>
+      </div>
+    </section>
+
+    <section id="beneficios" class="section pillars-section">
+      <div class="container">
+        <div class="section-heading center reveal">
+          <span class="kicker">Tecnologia que transforma informação em resultado</span>
+          <h2>Da visibilidade à decisão por dados.</h2>
+        </div>
+        <div class="pillar-flow">
+          <article class="pillar reveal"><span>01</span><div class="pillar-symbol">◎</div><h3>Proximidade digital</h3><p>Mais visibilidade do equipamento e capacidade de suporte.</p></article>
+          <div class="pillar-arrow">→</div>
+          <article class="pillar reveal"><span>02</span><div class="pillar-symbol">△</div><h3>Previsibilidade operacional</h3><p>Alertas e dados ajudam a identificar desvios antes que evoluam.</p></article>
+          <div class="pillar-arrow">→</div>
+          <article class="pillar reveal"><span>03</span><div class="pillar-symbol">◈</div><h3>Estabilidade e produtividade</h3><p>Mais controle sobre parâmetros críticos do processo.</p></article>
+          <div class="pillar-arrow">→</div>
+          <article class="pillar reveal"><span>04</span><div class="pillar-symbol">$</div><h3>Eficiência e custos</h3><p>Informações para apoiar manutenção e eficiência energética.</p></article>
+          <div class="pillar-arrow">→</div>
+          <article class="pillar reveal"><span>05</span><div class="pillar-symbol">▥</div><h3>Decisão por dados</h3><p>Históricos e indicadores para decidir com base em fatos.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="como-funciona" class="section how-section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="kicker">Como funciona</span>
+          <h2>Tecnologia sofisticada. Implementação simples.</h2>
+          <p>O Gateway Infinity coleta as informações do equipamento, envia os dados à nuvem e disponibiliza acompanhamento e interação pela plataforma.</p>
+        </div>
+
+        <div class="architecture reveal" aria-label="Arquitetura de funcionamento do Infinity">
+          <div class="arch-step"><div class="arch-art equipment-art"><img src="assets/chiller.png" alt="Chiller" /></div><b>Equipamento</b><small>CLPs e IHMs</small></div>
+          <div class="arch-link"><span>MODBUS</span>→</div>
+          <div class="arch-step"><div class="arch-art gateway-art"><img src="assets/gateway.png" alt="Gateway Infinity" /></div><b>Infinity Gateway</b><small>Coleta e conversão</small></div>
+          <div class="arch-link"><span>Wi-Fi / Ethernet / 4G</span>→</div>
+          <div class="arch-step"><div class="arch-art cloud-art">☁</div><b>AWS Cloud</b><small>MQTT / plataforma</small></div>
+          <div class="arch-link"><span>WEB</span>→</div>
+          <div class="arch-step"><div class="arch-art devices-art"><div class="desktop-mini"></div><div class="mobile-mini"></div></div><b>Web / Mobile</b><small>Acesso remoto</small></div>
+        </div>
+
+        <div class="tech-chips reveal">
+          <span>Modbus</span><span>MQTT</span><span>AWS Cloud</span><span>Ethernet</span><span>Wi-Fi</span><span>4G</span><span>Até 350 variáveis</span><span>8 GB local</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="aplicacoes" class="section applications-section">
+      <div class="container">
+        <div class="section-heading center reveal">
+          <span class="kicker">Aplicações</span>
+          <h2>Um Infinity para cada operação.</h2>
+        </div>
+
+        <div class="application-grid">
+          <article class="application-card plant-card reveal">
+            <div class="app-copy"><span class="app-label">Plant Control</span><h3>Uma planta. Uma visão.</h3><p>Integre equipamentos de diferentes fabricantes compatíveis em uma única plataforma e centralize a visão operacional.</p><ul><li>Parque de equipamentos monitorado</li><li>Integração multimarcas compatível</li><li>Customização conforme a planta</li></ul></div>
+            <div class="app-visual plant-visual"><img src="assets/dashboard-plant.png" alt="Visão de múltiplos equipamentos no Infinity" /></div>
+          </article>
+
+          <article class="application-card energy-card reveal">
+            <div class="app-copy"><span class="app-label">Energy</span><h3>Transforme consumo em informação.</h3><p>Variáveis elétricas passam a fazer parte da análise operacional, apoiando o acompanhamento do comportamento energético.</p><div class="energy-badges"><span>kWh</span><span>kW</span><span>V</span><span>A</span><span>Hz</span><span>FP</span></div><small>* Requer medidor para os planos Energy e Plant Control.</small></div>
+            <div class="app-visual energy-visual"><img src="assets/dashboard-energy.png" alt="Dashboard de gestão energética Infinity" /><img class="meter-float" src="assets/energy-meter.png" alt="Medidor de energia" /></div>
+          </article>
+
+          <article class="application-card medical-card reveal">
+            <div class="app-copy"><span class="app-label">Medical</span><h3>Monitoramento para ambientes críticos.</h3><p>Acompanhamento dedicado de temperaturas e variáveis relevantes em aplicações médico-hospitalares.</p><ul><li>Dashboard dedicado</li><li>Registro de temperaturas em áreas críticas</li><li>Monitoramento de temperatura da Sala de RM</li></ul></div>
+            <div class="app-visual medical-visual">
+              <div class="medical-room">
+                <div class="mri-ring"><div></div></div>
+                <div class="medical-sensor"><span>18,3 °C</span><small>ambiente</small></div>
+                <div class="medical-sensor sensor-2"><span>17,8 °C</span><small>processo</small></div>
+                <div class="medical-cloud">∞</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="seguranca" class="section security-section">
+      <div class="container">
+        <div class="section-heading center reveal">
+          <span class="kicker">Segurança e disponibilidade</span>
+          <h2>Sua operação conectada. Seus dados protegidos.</h2>
+        </div>
+        <div class="security-grid">
+          <article class="security-item reveal"><div>☁</div><h3>AWS Cloud</h3><p>Infraestrutura em nuvem para uma plataforma confiável e escalável.</p></article>
+          <article class="security-item reveal"><div>⬡</div><h3>Criptografia</h3><p>Proteção das informações durante comunicação e armazenamento.</p></article>
+          <article class="security-item reveal"><div>⇄</div><h3>Redundância</h3><p>Arquitetura preparada para ampliar disponibilidade da plataforma.</p></article>
+          <article class="security-item reveal"><div>▣</div><h3>Armazenamento local</h3><p>Gateway mantém dados localmente em situações de perda de conexão.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="planos" class="section plans-section">
+      <div class="container">
+        <div class="section-heading center reveal">
+          <span class="kicker">Planos Infinity</span>
+          <h2>Escolha a solução ideal para a sua operação.</h2>
+          <p>Valores mensais em destaque. O valor anual é mostrado como referência de contratação.</p>
+        </div>
+
+        <div class="plans-grid">
+          <article class="plan-card exclusive reveal">
+            <div class="plan-top"><span class="plan-icon">▣</span><h3>Exclusive</h3><p>Essencial</p></div>
+            <div class="price"><span class="currency">R$</span><strong>299</strong><span class="per">/mês</span></div>
+            <div class="annual">ou R$ 3.588/ano</div>
+            <ul><li>Monitoramento em tempo real</li><li>Automação remota — liga/desliga e set-point</li><li>Dashboard com gráficos</li><li>Alertas automáticos</li></ul>
+            <a class="btn plan-btn js-cta" data-cta="plano_exclusive" data-plan="Exclusive" href="#contato">Quero contratar</a>
+          </article>
+
+          <article class="plan-card energy reveal">
+            <div class="plan-top"><span class="plan-icon">⚡</span><h3>Energy</h3><p>Energia</p></div>
+            <div class="price"><span class="currency">R$</span><strong>399</strong><span class="per">/mês</span></div>
+            <div class="annual">ou R$ 4.788/ano</div>
+            <ul><li>Tudo do Exclusive</li><li>Monitoramento energético</li><li>Indicadores elétricos</li><li>Informações para análise de consumo</li></ul>
+            <a class="btn plan-btn js-cta" data-cta="plano_energy" data-plan="Energy" href="#contato">Quero contratar</a>
+          </article>
+
+          <article class="plan-card medical reveal">
+            <div class="plan-top"><span class="plan-icon">✚</span><h3>Medical</h3><p>Aplicações críticas</p></div>
+            <div class="price"><span class="currency">R$</span><strong>399</strong><span class="per">/mês</span></div>
+            <div class="annual">ou R$ 4.788/ano</div>
+            <ul><li>Tudo do Exclusive</li><li>Dashboard dedicado</li><li>Registro de temperaturas em áreas críticas</li><li>Monitoramento de temperatura da Sala de RM</li></ul>
+            <a class="btn plan-btn js-cta" data-cta="plano_medical" data-plan="Medical" href="#contato">Quero contratar</a>
+          </article>
+
+          <article class="plan-card plant reveal">
+            <div class="plan-top"><span class="plan-icon">⌂</span><h3>Plant Control</h3><p>Gestão da planta</p></div>
+            <div class="price"><span class="from">a partir de</span><span class="currency">R$</span><strong>999</strong><span class="per">/mês</span></div>
+            <div class="annual">ou R$ 11.988/ano</div>
+            <ul><li>Tudo do Exclusive</li><li>Parque de equipamentos monitorado</li><li>Equipamentos multimarcas compatíveis</li><li>Customização conforme necessidade da planta</li><li>Monitoramento energético</li></ul>
+            <a class="btn plan-btn js-cta" data-cta="plano_plant_control" data-plan="Plant Control" href="#contato">Fale com um especialista</a>
+          </article>
+        </div>
+        <p class="plan-note">* Valores reproduzem o material comercial fornecido para esta landing. Validar tabela vigente antes da publicação final.</p>
+      </div>
+    </section>
+
+    <section id="contato" class="section contact-section section-dark">
+      <div class="container contact-grid">
+        <div class="contact-copy reveal">
+          <span class="kicker kicker-light">CTA único</span>
+          <h2>Vamos falar sobre sua operação?</h2>
+          <p>Conte um pouco sobre sua necessidade. A equipe Refrisat poderá avaliar sua aplicação, entender os equipamentos envolvidos e indicar a configuração Infinity mais adequada.</p>
+          <div class="contact-context" id="contact-context" aria-live="polite">Fale com um especialista Infinity.</div>
+          <div class="contact-benefits"><span>✓ Análise da aplicação</span><span>✓ Avaliação dos equipamentos</span><span>✓ Definição da solução e do plano</span></div>
+        </div>
+        <div class="form-shell reveal">
+          <div class="form-top"><h3>Fale com um especialista</h3><span>Infinity System by Refrisat</span></div>
+          <iframe
+            id="ploomes-form"
+            title="Formulário de contato Infinity System"
+            src="https://forms.ploomes.com/form/4e3b3aabeecc45ac935a021d79d59610?iframe=true"
+            loading="lazy"
+            allow="clipboard-write"
+          ></iframe>
+          <p class="privacy-note">Ao enviar seus dados, você declara ciência sobre o tratamento das informações conforme a Política de Privacidade da Refrisat.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-wrap">
+      <div class="footer-brand"><img src="assets/infinity-logo.png" alt="Infinity System" /><span>by <strong>REFRISAT</strong></span></div>
+      <p>Infinity System — monitoramento e automação remota para operações industriais.</p>
+      <div class="footer-links"><a href="https://refrisat.com.br/" rel="noopener">Refrisat</a><a href="#contato">Contato</a></div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

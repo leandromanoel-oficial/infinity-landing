@@ -1,0 +1,10 @@
+# Fora do contexto de build — o build.py já ignora estes, mas mantê-los fora
+# do contexto deixa o `docker build` mais rápido e a imagem menor.
+.git
+dist/
+infinity-landing-*.tar.gz
+LOGOS/
+_backup-original/
+.DS_Store
+Thumbs.db
+desktop.ini

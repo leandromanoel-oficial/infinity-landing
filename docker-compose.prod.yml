@@ -1,0 +1,81 @@
+# =============================================================================
+#  PRODUÇÃO — Infinity System landing page (goinfinity.com.br)
+#
+#  Gerenciado pelo Portainer como Git Stack, atrás do Traefik já existente na
+#  VPS (rede externa `traefik_default`). Mesmo padrão do stack da Acuvia.
+#
+#  Portainer: Stacks → Add Stack → Repository → este arquivo.
+#  Variáveis (aba Environment do Portainer) — todas têm default, então funciona
+#  sem configurar nada; só confirme TRAEFIK_CERTRESOLVER (passo 2 abaixo).
+#
+#    DOMAIN                = goinfinity.com.br
+#    TRAEFIK_CERTRESOLVER  = letsencrypt   (o nome do resolver ACME no Traefik;
+#                                           confira em /docker/traefik/)
+#
+#  HTTPS + renovação automática: feitos pelo Traefik via ACME/Let's Encrypt
+#  (tls.certresolver abaixo). O Traefik renova sozinho antes de expirar e
+#  grava em acme.json. Nada de certbot.
+# =============================================================================
+
+networks:
+  traefik_default:
+    external: true
+
+services:
+  landing:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile
+    image: infinity-landing:latest
+    pull_policy: build
+    container_name: infinity-landing
+    restart: unless-stopped
+    networks:
+      - traefik_default
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik_default"
+
+      # ---- Router HTTPS: apex, a landing ---------------------------------
+      - "traefik.http.routers.infinity.rule=Host(`${DOMAIN:-goinfinity.com.br}`)"
+      - "traefik.http.routers.infinity.entrypoints=websecure"
+      - "traefik.http.routers.infinity.tls=true"
+      - "traefik.http.routers.infinity.tls.certresolver=${TRAEFIK_CERTRESOLVER:-letsencrypt}"
+      - "traefik.http.routers.infinity.middlewares=infinity-headers"
+
+      # ---- Router HTTPS: www -> apex (301) -----------------------------
+      - "traefik.http.routers.infinity-www.rule=Host(`www.${DOMAIN:-goinfinity.com.br}`)"
+      - "traefik.http.routers.infinity-www.entrypoints=websecure"
+      - "traefik.http.routers.infinity-www.tls=true"
+      - "traefik.http.routers.infinity-www.tls.certresolver=${TRAEFIK_CERTRESOLVER:-letsencrypt}"
+      - "traefik.http.routers.infinity-www.middlewares=infinity-to-apex"
+
+      # ---- Router HTTP: tudo na :80 -> HTTPS (301) ---------------------
+      # Redundante se o Traefik já tem redirect global na entrypoint `web`,
+      # mas inofensivo e deixa o stack autossuficiente.
+      - "traefik.http.routers.infinity-http.rule=Host(`${DOMAIN:-goinfinity.com.br}`) || Host(`www.${DOMAIN:-goinfinity.com.br}`)"
+      - "traefik.http.routers.infinity-http.entrypoints=web"
+      - "traefik.http.routers.infinity-http.middlewares=infinity-to-https"
+
+      # ---- Serviço ------------------------------------------------------
+      - "traefik.http.services.infinity.loadbalancer.server.port=80"
+
+      # ---- Middlewares -------------------------------------------------
+      - "traefik.http.middlewares.infinity-to-https.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.infinity-to-https.redirectscheme.permanent=true"
+
+      - "traefik.http.middlewares.infinity-to-apex.redirectregex.regex=^https?://www\\.${DOMAIN:-goinfinity.com.br}/(.*)"
+      - "traefik.http.middlewares.infinity-to-apex.redirectregex.replacement=https://${DOMAIN:-goinfinity.com.br}/$${1}"
+      - "traefik.http.middlewares.infinity-to-apex.redirectregex.permanent=true"
+
+      # Cabeçalhos de segurança (o que o goinfinity.conf punha no nginx).
+      # HSTS: 1 ano + includeSubDomains. Só some se você trocar o resolver
+      # e o domínio ficar sem HTTPS — o navegador guarda a diretiva.
+      - "traefik.http.middlewares.infinity-headers.headers.stsSeconds=31536000"
+      - "traefik.http.middlewares.infinity-headers.headers.stsIncludeSubdomains=true"
+      - "traefik.http.middlewares.infinity-headers.headers.contentTypeNosniff=true"
+      - "traefik.http.middlewares.infinity-headers.headers.referrerPolicy=strict-origin-when-cross-origin"
+      # Permissions-Policy e CSP não têm campo dedicado no middleware headers —
+      # vão como cabeçalhos de resposta customizados.
+      - "traefik.http.middlewares.infinity-headers.headers.customResponseHeaders.Permissions-Policy=geolocation=(), microphone=(), camera=()"
+      - "traefik.http.middlewares.infinity-headers.headers.customResponseHeaders.Content-Security-Policy=default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-src https://forms.ploomes.com; form-action 'self'; base-uri 'self'; frame-ancestors 'self'; object-src 'none'; upgrade-insecure-requests"

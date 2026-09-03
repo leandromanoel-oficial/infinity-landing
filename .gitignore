@@ -1,0 +1,12 @@
+# Artefatos de publicação
+dist/
+infinity-landing-*.tar.gz
+
+# Material de marca bruto — pesado e binário.
+# Comente esta linha se decidir versionar (considere Git LFS).
+LOGOS/
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini

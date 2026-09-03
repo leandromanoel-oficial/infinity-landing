@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Conferir a data de "Última atualização" a cada revisão do texto. -->
+<title>Política de Cookies | Infinity System</title>
+<meta name="description" content="Quais tecnologias de armazenamento a landing page do Infinity System utiliza — e quais deliberadamente não utiliza.">
+<link rel="canonical" href="https://goinfinity.com.br/politica-de-cookies.html">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32">
+<link rel="icon" href="assets/favicon-512.png" sizes="512x512">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="legal-page">
+
+<header class="legal-header">
+  <div class="container">
+    <a class="brand" href="index.html" aria-label="Infinity System by Refrisat — voltar à página inicial">
+      <picture>
+        <source srcset="assets/infinity-logo.webp" type="image/webp">
+        <img class="brand-mark" src="assets/infinity-logo.png" width="104" height="75" alt="Infinity System">
+      </picture>
+      <span class="brand-by">by</span>
+      <img class="brand-refrisat" src="assets/refrisat.svg" width="96" height="25" alt="Refrisat">
+    </a>
+    <a class="back-link" href="index.html">Voltar à landing</a>
+  </div>
+</header>
+
+<main class="legal-doc">
+  <p class="kicker">Armazenamento</p>
+  <h1>Política de Cookies e Tecnologias Similares</h1>
+  <p class="doc-meta">Última atualização: 3 de setembro de 2026.</p>
+
+  <p>Esta página descreve as tecnologias de armazenamento utilizadas na
+     landing page do <strong>Infinity System</strong>. Ela complementa a
+     <a href="politica-de-privacidade.html">Política de Privacidade</a>, onde
+     está a identificação do Controlador. Dúvidas sobre privacidade podem ser
+     encaminhadas ao Encarregado, pelo e-mail
+     <a href="mailto:dpo@refrisat.com.br">dpo@refrisat.com.br</a>.</p>
+
+  <div class="controller">
+    <p><strong>Resumo:</strong> esta landing page não utiliza cookies de
+       terceiros, não faz publicidade comportamental, não instala Google
+       Analytics, Meta Pixel ou LinkedIn Insight Tag, e não guarda nada no
+       navegador depois que a aba é fechada. Por isso não há banner de
+       consentimento — não existe escolha a ser feita.</p>
+  </div>
+
+  <h2>1. O que é utilizado</h2>
+  <p>A página utiliza exclusivamente <code>sessionStorage</code>, um
+     armazenamento de escopo de sessão do próprio navegador. Ele guarda dois
+     itens, ambos apagados automaticamente ao fechar a aba:</p>
+  <ul>
+    <li><code>infinity_utm_current</code> — os parâmetros UTM da URL de
+        entrada, para que o formulário registre a campanha de origem mesmo
+        que o visitante navegue pelas seções antes de preencher;</li>
+    <li><code>infinity_cta_context</code> — qual botão comercial foi clicado e
+        o plano de interesse correspondente, para que o contato chegue ao CRM
+        com esse contexto.</li>
+  </ul>
+  <p>Nenhum dos dois identifica o visitante: guardam a origem da visita, não a
+     pessoa. Não há identificador único, nem leitura entre visitas
+     diferentes.</p>
+
+  <h2>2. O que não é utilizado</h2>
+  <ul>
+    <li>cookies de publicidade ou de redes sociais;</li>
+    <li>ferramentas de analytics ou mapas de calor;</li>
+    <li><code>localStorage</code> ou qualquer armazenamento persistente;</li>
+    <li>atribuição de primeira origem entre visitas — o que exigiria
+        armazenamento persistente e, com ele, consentimento prévio.</li>
+  </ul>
+
+  <h2>3. Parâmetros na URL</h2>
+  <p>Independentemente de qualquer armazenamento, parâmetros UTM presentes na
+     própria URL de acesso são lidos durante a visita e enviados junto ao
+     formulário para identificar a campanha de origem daquele contato. Isso
+     ocorre na navegação corrente, sem gravação persistente.</p>
+
+  <h2>4. Serviços incorporados</h2>
+  <p>O formulário de contato é carregado a partir da plataforma
+     <strong>Ploomes</strong>, em um <code>iframe</code>. Esse serviço pode
+     utilizar recursos técnicos próprios, necessários ao carregamento e ao
+     envio das informações, sujeitos às políticas do próprio Ploomes.</p>
+  <p>As fontes tipográficas são servidas pelo próprio domínio da landing page.
+     Não há requisição a Google Fonts nem a qualquer outra CDN externa, de
+     modo que o endereço IP do visitante não é transferido a terceiros pela
+     simples leitura da página.</p>
+
+  <h2>5. Como remover</h2>
+  <p>Fechar a aba já elimina os itens descritos no item 1. O visitante também
+     pode limpar os dados do site a qualquer momento pelas configurações do
+     navegador, sem qualquer prejuízo à leitura da página.</p>
+
+  <p class="notice">Esta Política descreve exatamente o comportamento da
+     versão publicada. A inclusão de qualquer ferramenta de analytics,
+     publicidade ou armazenamento persistente exige, antes da ativação, a
+     revisão deste documento e a implantação de um mecanismo de consentimento
+     compatível com a orientação da ANPD.</p>
+
+</main>
+
+<footer class="legal-footer">
+  <div class="container">
+    <p>&copy; 2026 Refrisat — Infinity System.</p>
+    <nav aria-label="Documentos legais">
+      <a href="politica-de-privacidade.html">Política de Privacidade</a>
+      <a href="politica-de-cookies.html" aria-current="page">Política de Cookies</a>
+      <a href="termos-de-uso.html">Termos de Uso</a>
+      <a href="index.html">Landing</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>

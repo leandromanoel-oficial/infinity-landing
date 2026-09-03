@@ -1,0 +1,5 @@
+# https://goinfinity.com.br
+User-agent: *
+Allow: /
+
+Sitemap: https://goinfinity.com.br/sitemap.xml

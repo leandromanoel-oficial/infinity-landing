@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Domínio de produção: https://goinfinity.com.br -->
+<title>Infinity System | Monitoramento e automação remota — Refrisat</title>
+<meta name="description" content="Monitoramento em tempo real, automação remota e gestão energética para chillers e equipamentos industriais. Planos a partir de R$ 299/mês. Infinity System by Refrisat.">
+<link rel="canonical" href="https://goinfinity.com.br/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#04101f">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Infinity System by Refrisat">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://goinfinity.com.br/">
+<meta property="og:title" content="Infinity System | Seu processo industrial sob controle. De qualquer lugar.">
+<meta property="og:description" content="Monitoramento em tempo real, automação remota e gestão energética para chillers e equipamentos industriais.">
+<meta property="og:image" content="https://goinfinity.com.br/assets/og-infinity.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Plataforma Infinity System monitorando um chiller industrial Refrisat">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Infinity System by Refrisat">
+<meta name="twitter:description" content="Seu processo industrial sob controle. De qualquer lugar.">
+<meta name="twitter:image" content="https://goinfinity.com.br/assets/og-infinity.jpg">
+
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/favicon-512.png" sizes="512x512" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+<!-- ============ Sprite de ícones (um único bloco, reaproveitado) ====== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <g id="ico-base" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></g>
+  </defs>
+  <symbol id="i-gauge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18.5a8.5 8.5 0 1 1 16 0"/><path d="m12 14.5 4.2-4.6"/><circle cx="12" cy="15" r="1.4" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5a6 6 0 0 1 12 0c0 4.6 1.8 5.8 1.8 5.8H4.2S6 14.1 6 9.5Z"/><path d="M10.2 19a2.2 2.2 0 0 0 3.6 0"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h9M19 8h1M4 16h5M15 16h5"/><circle cx="16" cy="8" r="2.4"/><circle cx="12" cy="16" r="2.4"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v15.2a.8.8 0 0 0 .8.8H20"/><path d="m7.5 15.2 3.4-4.6 3 2.6 4.6-6.4"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13.2 2.5 4.8 13.4h5.9l-.7 8.1 8.9-11.2h-5.9z"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17.4 18.5a4.2 4.2 0 0 0 .3-8.4 6.2 6.2 0 0 0-11.8-1 3.7 3.7 0 0 0 .8 9.4z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.6"/><path d="M12 7.2V12l3.2 1.9"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.8 4.8 5.9v5.6c0 4.4 3 7.8 7.2 9.7 4.2-1.9 7.2-5.3 7.2-9.7V5.9z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4.6" y="10.4" width="14.8" height="10.2" rx="2.2"/><path d="M8.2 10.4V7.6a3.8 3.8 0 0 1 7.6 0v2.8"/></symbol>
+  <symbol id="i-sync" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.6 11.4a8.4 8.4 0 0 1 14.2-5.2l2.6 2.4"/><path d="M20.4 4.2v4.4H16"/><path d="M20.4 12.6a8.4 8.4 0 0 1-14.2 5.2l-2.6-2.4"/><path d="M3.6 19.8v-4.4H8"/></symbol>
+  <symbol id="i-drive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13.2" width="18" height="7" rx="2"/><path d="M5.6 13.2 8 4.6h8l2.4 8.6"/><path d="M7 16.8h.02M10.4 16.8h.02"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="m4.8 12.6 4.8 4.8 9.6-10.2"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5.5v13M5.5 12h13"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12H19"/><path d="m13.6 6.4 5.6 5.6-5.6 5.6"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2.8 9 5-9 5-9-5z"/><path d="m3 12.4 9 5 9-5"/><path d="m3 16.9 9 5 9-5"/></symbol>
+  <symbol id="i-cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3.2h4v6.6h6.6v4H14v6.6h-4v-6.6H3.4v-4H10z"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.6"/><circle cx="12" cy="12" r="4.4"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.2 17.6 6.4-6.4 4 4 7.2-7.6"/><path d="M15.4 7.6h5.4V13"/></symbol>
+  <symbol id="i-scale" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.2v16"/><path d="M6.6 7.6h10.8"/><path d="M8.4 20.2h7.2"/><path d="m6.6 7.6-3.4 6.6a3.4 3.4 0 0 0 6.8 0z"/><path d="m17.4 7.6-3.4 6.6a3.4 3.4 0 0 0 6.8 0z"/></symbol>
+  <symbol id="i-money" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2v17.6"/><path d="M16.6 7.6c0-1.9-2.1-3-4.6-3S7.4 5.7 7.4 7.6s2.1 2.7 4.6 3.3 4.6 1.4 4.6 3.4-2.1 3.1-4.6 3.1-4.6-1.2-4.6-3.1"/></symbol>
+  <symbol id="i-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7.8" ry="3.2"/><path d="M4.2 6v12c0 1.8 3.5 3.2 7.8 3.2s7.8-1.4 7.8-3.2V6"/><path d="M4.2 12c0 1.8 3.5 3.2 7.8 3.2s7.8-1.4 7.8-3.2"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6.4" y="6.4" width="11.2" height="11.2" rx="2.2"/><rect x="10" y="10" width="4" height="4" rx="1"/><path d="M9.2 2.8v3.6M14.8 2.8v3.6M9.2 17.6v3.6M14.8 17.6v3.6M2.8 9.2h3.6M2.8 14.8h3.6M17.6 9.2h3.6M17.6 14.8h3.6"/></symbol>
+  <symbol id="i-monitor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.4" y="4.2" width="13" height="9.4" rx="1.6"/><path d="M6.4 17.8h5.2M9 13.6v4.2"/><rect x="17.2" y="8" width="4.4" height="9.8" rx="1.4"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9.2" cy="8.4" r="3.6"/><path d="M2.8 20a6.4 6.4 0 0 1 12.8 0"/><path d="M16.4 5.2a3.6 3.6 0 0 1 0 6.6"/><path d="M17.6 14.4A6.4 6.4 0 0 1 21.2 20"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.2 12S5.8 5.6 12 5.6 21.8 12 21.8 12 18.2 18.4 12 18.4 2.2 12 2.2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.8" y="5" width="18.4" height="14" rx="2.2"/><path d="m3.6 7 8.4 6 8.4-6"/></symbol>
+  <symbol id="i-router" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.8" y="13" width="18.4" height="7.2" rx="2"/><path d="M6.4 16.6h.02M9.8 16.6h.02"/><path d="M17.6 16.6h1.4"/><path d="M12 10V6.2"/><path d="M8.4 5.2a5.2 5.2 0 0 1 7.2 0"/><path d="M6 2.9a8.6 8.6 0 0 1 12 0"/></symbol>
+</svg>
+
+<!-- ============ Header ============================================== -->
+<header class="site-header" id="topo">
+  <div class="container header-inner">
+    <a class="brand" href="#topo" aria-label="Infinity System by Refrisat — início">
+      <picture>
+        <source srcset="assets/infinity-logo.webp" type="image/webp">
+        <img class="brand-mark" src="assets/infinity-logo.png" width="104" height="75" alt="Infinity System">
+      </picture>
+      <span class="brand-by">by</span>
+      <img class="brand-refrisat" src="assets/refrisat.svg" width="96" height="25" alt="Refrisat">
+    </a>
+
+    <button class="nav-toggle" type="button" aria-controls="menu" aria-expanded="false">
+      <span></span><span class="sr-only">Abrir menu de navegação</span>
+    </button>
+
+    <nav class="main-nav" id="menu" aria-label="Navegação principal">
+      <ul>
+        <li><a href="#plataforma">A plataforma</a></li>
+        <li><a href="#recursos">Recursos</a></li>
+        <li><a href="#como-funciona">Como funciona</a></li>
+        <li><a href="#aplicacoes">Aplicações</a></li>
+        <li><a href="#planos">Planos</a></li>
+        <li><a href="#duvidas">Dúvidas</a></li>
+        <li class="mobile-cta"><a class="btn btn-primary btn-block js-cta" data-cta="menu_mobile" href="#contato">Falar com um especialista</a></li>
+      </ul>
+    </nav>
+
+    <a class="btn btn-primary header-cta js-cta" data-cta="header" href="#contato">Falar com um especialista</a>
+  </div>
+</header>
+
+<main id="conteudo">
+
+  <!-- ============ Hero ============================================== -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy reveal">
+        <p class="hero-pill"><svg aria-hidden="true"><use href="#i-router"></use></svg> Inteligência de fábrica nos chillers Refrisat</p>
+        <h1>Seu processo industrial <em>sob controle.<br>De qualquer lugar.</em></h1>
+        <p class="hero-lead">Monitoramento em tempo real, automação remota e inteligência operacional para transformar os dados dos seus equipamentos em decisões mais rápidas e seguras.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary js-cta" data-cta="hero_principal" href="#contato">Falar com um especialista <svg aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+          <a class="btn btn-ghost-light" href="#plataforma">Ver como funciona</a>
+        </div>
+        <ul class="hero-proof">
+          <li><span class="proof-ico"><span>24/7</span></span> Monitoramento contínuo</li>
+          <li><span class="proof-ico"><svg aria-hidden="true"><use href="#i-cloud"></use></svg></span> Acesso em nuvem</li>
+          <li><span class="proof-ico"><svg aria-hidden="true"><use href="#i-sliders"></use></svg></span> Automação remota</li>
+        </ul>
+      </div>
+
+      <div class="hero-stage reveal">
+        <div class="hero-screen">
+          <picture>
+            <source srcset="assets/dashboard-main.webp" type="image/webp">
+            <img src="assets/dashboard-main.jpg" width="930" height="544" fetchpriority="high" decoding="async"
+                 alt="Painel do Infinity System exibindo status do chiller, variáveis críticas de temperatura e vazão, gráfico de tendência e lista de alertas">
+          </picture>
+        </div>
+        <dl class="hero-readouts">
+          <div class="readout"><dt>Temperatura</dt><dd>17,9 °C</dd></div>
+          <div class="readout"><dt>Vazão</dt><dd>23,1 m³/h</dd></div>
+          <div class="readout"><dt>Set point</dt><dd>18,0 °C</dd></div>
+          <div class="readout"><dt>Potência</dt><dd>42,8 kW</dd></div>
+        </dl>
+        <p class="hero-caption">Tela real da plataforma. Valores meramente ilustrativos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Variáveis ========================================= -->
+  <section class="section" id="plataforma">
+    <div class="container vars-grid">
+      <div class="reveal">
+        <div class="sec-head" style="margin-bottom:0">
+          <p class="eyebrow">Infinitas variáveis</p>
+          <h2>Dados que ficavam dentro do equipamento agora trabalham a favor da operação.</h2>
+          <p>O Infinity transforma variáveis de processo em informação acessível para quem opera, para quem faz manutenção e para quem decide.</p>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <!-- Em telas estreitas o diagrama vira lista: o SVG ficaria ilegível. -->
+        <ul class="var-list">
+          <li><span class="var-dot"><svg aria-hidden="true"><use href="#i-gauge"></use></svg></span><b>Temperatura</b><small>18,4 °C</small></li>
+          <li><span class="var-dot"><svg aria-hidden="true"><use href="#i-sync"></use></svg></span><b>Vazão</b><small>23,1 m³/h</small></li>
+          <li><span class="var-dot"><svg aria-hidden="true"><use href="#i-clock"></use></svg></span><b>Pressão</b><small>4,8 bar</small></li>
+          <li><span class="var-dot is-energy"><svg aria-hidden="true"><use href="#i-zap"></use></svg></span><b>Energia</b><small>42,8 kW</small></li>
+          <li><span class="var-dot is-ok"><svg aria-hidden="true"><use href="#i-check"></use></svg></span><b>Status</b><small>Operando</small></li>
+          <li><span class="var-dot"><svg aria-hidden="true"><use href="#i-bell"></use></svg></span><b>Alarmes</b><small>0 ativos</small></li>
+        </ul>
+
+        <svg class="var-map" viewBox="0 0 620 330" role="img"
+             aria-label="Diagrama: temperatura, vazão, pressão, energia, status e alarmes convergindo para a plataforma Infinity">
+          <g class="link">
+            <path d="M120 62 C 240 92 250 140 292 158"/>
+            <path d="M96 165 C 190 165 230 160 288 165"/>
+            <path d="M120 268 C 240 240 250 190 292 174"/>
+            <path d="M500 62 C 380 92 370 140 328 158"/>
+            <path d="M524 165 C 430 165 390 170 332 165"/>
+            <path d="M500 268 C 380 240 370 190 328 174"/>
+          </g>
+
+          <circle class="core-ring" cx="310" cy="166" r="74" stroke-width="1"/>
+          <circle class="core-ring" cx="310" cy="166" r="58" stroke-width="1"/>
+          <circle cx="310" cy="166" r="46" fill="#0b2647"/>
+          <image href="assets/infinity-mark-light.png" x="276" y="150" width="68" height="30"/>
+          <text x="310" y="196" text-anchor="middle" font-size="8" font-weight="800" letter-spacing="1.2" fill="#7fd6f2">INFINITY</text>
+
+          <!-- Coluna esquerda -->
+          <g>
+            <rect class="chip-bg" x="8" y="34" width="152" height="54" rx="14"/>
+            <circle class="var-badge" cx="38" cy="61" r="15"/>
+            <g class="var-badge-ico" transform="translate(29,52)"><path d="M9 1.5v7.5"/><path d="M6.4 4.2 9 1.6l2.6 2.6"/><path d="M4.6 11.6a4.4 4.4 0 1 0 8.8 0 4.4 4.4 0 0 0-8.8 0Z" transform="translate(-4.4,-2)"/></g>
+            <text class="chip-name" x="62" y="57">Temperatura</text>
+            <text class="chip-val"  x="62" y="72">18,4 °C</text>
+          </g>
+          <g>
+            <rect class="chip-bg" x="8" y="138" width="152" height="54" rx="14"/>
+            <circle class="var-badge" cx="38" cy="165" r="15"/>
+            <g class="var-badge-ico" transform="translate(30,158)"><path d="M0 8c2.6-4 5.2 4 7.8 0s5.2 4 7.8 0" transform="translate(0,-2)"/><path d="M0 12c2.6-4 5.2 4 7.8 0s5.2 4 7.8 0" transform="translate(0,-3)"/></g>
+            <text class="chip-name" x="62" y="161">Vazão</text>
+            <text class="chip-val"  x="62" y="176">23,1 m³/h</text>
+          </g>
+          <g>
+            <rect class="chip-bg" x="8" y="242" width="152" height="54" rx="14"/>
+            <circle class="var-badge" cx="38" cy="269" r="15"/>
+            <g class="var-badge-ico" transform="translate(30,261)"><circle cx="8" cy="8" r="6.6"/><path d="M8 8 11.4 4.8"/></g>
+            <text class="chip-name" x="62" y="265">Pressão</text>
+            <text class="chip-val"  x="62" y="280">4,8 bar</text>
+          </g>
+
+          <!-- Coluna direita -->
+          <g>
+            <rect class="chip-bg" x="460" y="34" width="152" height="54" rx="14"/>
+            <circle class="var-badge is-energy" cx="590" cy="61" r="15"/>
+            <g class="var-badge-ico" transform="translate(583,53)"><path d="M8.2 0 2 8h5l-.6 8L13 8H8z" transform="translate(-3.5,0) scale(.95)"/></g>
+            <text class="chip-name" x="566" y="57" text-anchor="end">Energia</text>
+            <text class="chip-val"  x="566" y="72" text-anchor="end">42,8 kW</text>
+          </g>
+          <g>
+            <rect class="chip-bg" x="460" y="138" width="152" height="54" rx="14"/>
+            <circle class="var-badge is-ok" cx="590" cy="165" r="15"/>
+            <g class="var-badge-ico" transform="translate(583,158)"><path d="M0 7.6 5 12.4 13.6 3.2" transform="translate(-.6,0)"/></g>
+            <text class="chip-name" x="566" y="161" text-anchor="end">Status</text>
+            <text class="chip-val"  x="566" y="176" text-anchor="end">Operando</text>
+          </g>
+          <g>
+            <rect class="chip-bg" x="460" y="242" width="152" height="54" rx="14"/>
+            <circle class="var-badge" cx="590" cy="269" r="15"/>
+            <g class="var-badge-ico" transform="translate(583,261)"><path d="M7.4 2.4v6.4"/><path d="M7.4 12.4h.02"/></g>
+            <text class="chip-name" x="566" y="265" text-anchor="end">Alarmes</text>
+            <text class="chip-val"  x="566" y="280" text-anchor="end">0 ativos</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Proximidade ======================================= -->
+  <section class="section section-tint">
+    <div class="container">
+      <div class="prox-card reveal">
+        <div>
+          <p class="eyebrow">Inteligência que nasce com o equipamento</p>
+          <h2 style="font-size:var(--fs-h2)">Monitoramento e automação remota como recurso padrão.</h2>
+          <p style="margin-top:var(--sp-4); color:var(--ink-3); font-size:var(--fs-lead)">Nos chillers Refrisat, o Infinity amplia a visibilidade da operação desde o primeiro dia. A equipe de Serviços acompanha o comportamento do equipamento, apoiando análises, suporte e a identificação de situações que merecem atenção.</p>
+          <div class="prox-stats">
+            <div><b>24/7</b> Acompanhamento contínuo</div>
+            <div><b><svg aria-hidden="true"><use href="#i-users"></use></svg></b> Proximidade com o time Refrisat</div>
+            <div><b><svg aria-hidden="true"><use href="#i-eye"></use></svg></b> Diagnóstico com mais contexto</div>
+          </div>
+        </div>
+
+        <div class="prox-media">
+          <svg class="prox-flow" viewBox="0 0 460 260" role="img"
+               aria-label="Diagrama: o equipamento envia dados para a nuvem Infinity, que é acessada pelo cliente e pela equipe de serviços da Refrisat">
+            <path class="wire" d="M92 108 C 130 60 190 48 222 62"/>
+            <path class="wire" d="M368 108 C 330 60 270 48 238 62"/>
+            <path class="wire" d="M230 104 L 230 160"/>
+
+            <!-- Equipamento -->
+            <rect class="node" x="34" y="102" width="116" height="72" rx="16" stroke-width="1.4"/>
+            <g transform="translate(78,116)" fill="none" stroke="#0a5ba4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="4" width="26" height="20" rx="3"/><path d="M8 4V1.5M20 4V1.5M7 11h6M7 16h6M18 11h4M18 16h4"/>
+            </g>
+            <text class="label" x="92" y="160">EQUIPAMENTO</text>
+
+            <!-- Nuvem -->
+            <rect class="node node-dark" x="176" y="30" width="108" height="62" rx="18" stroke="none"/>
+            <image href="assets/infinity-mark-light.png" x="204" y="44" width="52" height="23"/>
+            <text class="label label-light" x="230" y="80">INFINITY CLOUD</text>
+
+            <!-- Serviços -->
+            <rect class="node" x="310" y="102" width="116" height="72" rx="16" stroke-width="1.4"/>
+            <g transform="translate(354,116)" fill="none" stroke="#0a5ba4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="7" r="4"/><path d="M2 22a7 7 0 0 1 14 0"/><path d="M20 7.6a3.4 3.4 0 0 1 0 5.4"/>
+            </g>
+            <text class="label" x="368" y="160">SERVIÇOS REFRISAT</text>
+
+            <!-- Cliente -->
+            <rect class="node" x="172" y="160" width="116" height="70" rx="16" stroke-width="1.4"/>
+            <g transform="translate(214,176)" fill="none" stroke="#0a5ba4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="0" y="1" width="21" height="15" rx="2"/><path d="M6 20h9M10.5 16v4"/><rect x="25" y="5" width="7" height="15" rx="1.6"/>
+            </g>
+            <text class="label" x="230" y="218">CLIENTE</text>
+            <text class="sub"   x="230" y="248">Web e mobile</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Recursos ========================================== -->
+  <section class="section" id="recursos">
+    <div class="container">
+      <div class="sec-head is-center reveal">
+        <p class="eyebrow">Mais do que visualizar dados</p>
+        <h2>Interaja com a sua operação.</h2>
+        <p>Recursos para acompanhar, analisar e agir com mais informação.</p>
+      </div>
+      <div class="card-grid">
+        <article class="card reveal"><div class="ico-tile"><svg aria-hidden="true"><use href="#i-gauge"></use></svg></div><h3>Monitoramento em tempo real</h3><p>Acompanhe as principais variáveis do equipamento no momento em que acontecem.</p></article>
+        <article class="card reveal"><div class="ico-tile"><svg aria-hidden="true"><use href="#i-bell"></use></svg></div><h3>Alertas e notificações</h3><p>Receba avisos automáticos sobre condições e eventos que merecem atenção.</p></article>
+        <article class="card reveal"><div class="ico-tile"><svg aria-hidden="true"><use href="#i-sliders"></use></svg></div><h3>Automação remota</h3><p>Mediante controle autorizado, ligue, desligue e altere o set-point à distância.</p></article>
+        <article class="card reveal"><div class="ico-tile"><svg aria-hidden="true"><use href="#i-chart"></use></svg></div><h3>Dashboards e históricos</h3><p>Visualize gráficos, tendências e séries históricas para entender o processo.</p></article>
+        <article class="card reveal"><div class="ico-tile"><svg aria-hidden="true"><use href="#i-zap"></use></svg></div><h3>Gestão energética</h3><p>Acompanhe variáveis elétricas e indicadores de consumo para apoiar decisões.</p></article>
+        <article class="card reveal"><div class="ico-tile"><svg aria-hidden="true"><use href="#i-cloud"></use></svg></div><h3>Acesso em nuvem</h3><p>Consulte seus equipamentos pela plataforma, no computador ou no celular.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Tempo real ======================================== -->
+  <section class="section section-dark">
+    <div class="container rt-grid">
+      <div class="reveal">
+        <p class="eyebrow eyebrow-light">Tempo real, de verdade</p>
+        <h2 style="font-size:var(--fs-h2)">Quando algo acontece no equipamento, você vê.</h2>
+        <p style="margin-top:var(--sp-4); font-size:var(--fs-lead)">Dados instantâneos dão visibilidade do comportamento da operação sem depender apenas da periodicidade de gravação do histórico.</p>
+        <ul class="rt-list">
+          <li><svg width="14" height="14" aria-hidden="true" style="color:var(--cyan-400)"><use href="#i-check"></use></svg> Temperatura de retorno</li>
+          <li><svg width="14" height="14" aria-hidden="true" style="color:var(--cyan-400)"><use href="#i-check"></use></svg> Temperatura de resfriamento</li>
+          <li><svg width="14" height="14" aria-hidden="true" style="color:var(--cyan-400)"><use href="#i-check"></use></svg> Vazão</li>
+          <li><svg width="14" height="14" aria-hidden="true" style="color:var(--cyan-400)"><use href="#i-check"></use></svg> Capacidade térmica</li>
+          <li><svg width="14" height="14" aria-hidden="true" style="color:var(--cyan-400)"><use href="#i-check"></use></svg> Temperatura ambiente</li>
+        </ul>
+      </div>
+      <div class="rt-screen reveal">
+        <picture>
+          <source srcset="assets/dashboard-main.webp" type="image/webp">
+          <img src="assets/dashboard-main.jpg" width="930" height="544" loading="lazy" decoding="async"
+               alt="Painel do Infinity System com variáveis críticas do chiller e gráfico de tendência em tempo real">
+        </picture>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Pilares =========================================== -->
+  <section class="section">
+    <div class="container">
+      <div class="sec-head is-center reveal">
+        <p class="eyebrow">Tecnologia que transforma informação em resultado</p>
+        <h2>Da visibilidade à decisão por dados.</h2>
+      </div>
+      <ol class="steps">
+        <li class="step reveal"><p class="step-n">01</p><div class="step-ico"><svg aria-hidden="true"><use href="#i-target"></use></svg></div><h3>Proximidade digital</h3><p>Mais visibilidade do equipamento e mais capacidade de suporte.</p></li>
+        <li class="step reveal"><p class="step-n">02</p><div class="step-ico"><svg aria-hidden="true"><use href="#i-trend"></use></svg></div><h3>Previsibilidade operacional</h3><p>Alertas e dados ajudam a identificar desvios antes que evoluam.</p></li>
+        <li class="step reveal"><p class="step-n">03</p><div class="step-ico"><svg aria-hidden="true"><use href="#i-scale"></use></svg></div><h3>Estabilidade e produtividade</h3><p>Mais controle sobre os parâmetros críticos do processo.</p></li>
+        <li class="step reveal"><p class="step-n">04</p><div class="step-ico"><svg aria-hidden="true"><use href="#i-money"></use></svg></div><h3>Eficiência e custos</h3><p>Informação para apoiar manutenção e eficiência energética.</p></li>
+        <li class="step reveal"><p class="step-n">05</p><div class="step-ico"><svg aria-hidden="true"><use href="#i-database"></use></svg></div><h3>Decisão por dados</h3><p>Históricos e indicadores para decidir com base em fatos.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ Como funciona ===================================== -->
+  <section class="section section-tint" id="como-funciona">
+    <div class="container">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Como funciona</p>
+        <h2>Tecnologia sofisticada. Implementação simples.</h2>
+        <p>O Gateway Infinity coleta as informações do equipamento, envia os dados à nuvem e disponibiliza acompanhamento e interação pela plataforma.</p>
+      </div>
+
+      <div class="arch reveal">
+        <div class="arch-node">
+          <div class="arch-art">
+            <picture>
+              <source srcset="assets/chiller.webp" type="image/webp">
+              <img src="assets/chiller.png" width="247" height="206" loading="lazy" decoding="async" alt="Chiller industrial Refrisat">
+            </picture>
+          </div>
+          <b>Equipamento</b><small>CLPs e IHMs</small>
+        </div>
+
+        <div class="arch-link"><span>Modbus</span><svg viewBox="0 0 40 12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6h34"/><path d="m30 1.5 5 4.5-5 4.5"/></svg></div>
+
+        <div class="arch-node">
+          <div class="arch-art">
+            <picture>
+              <source srcset="assets/gateway.webp" type="image/webp">
+              <img src="assets/gateway.png" width="700" height="1039" loading="lazy" decoding="async" alt="Gateway IoT do Infinity System">
+            </picture>
+          </div>
+          <b>Infinity Gateway</b><small>Coleta e conversão</small>
+        </div>
+
+        <div class="arch-link"><span>Wi-Fi / Ethernet / 4G</span><svg viewBox="0 0 40 12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6h34"/><path d="m30 1.5 5 4.5-5 4.5"/></svg></div>
+
+        <div class="arch-node">
+          <div class="arch-art"><span class="ico-cloud"><svg aria-hidden="true"><use href="#i-cloud"></use></svg></span></div>
+          <b>Nuvem AWS</b><small>MQTT e plataforma</small>
+        </div>
+
+        <div class="arch-link"><span>Web</span><svg viewBox="0 0 40 12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6h34"/><path d="m30 1.5 5 4.5-5 4.5"/></svg></div>
+
+        <div class="arch-node">
+          <div class="arch-art"><span class="ico-cloud"><svg aria-hidden="true"><use href="#i-monitor"></use></svg></span></div>
+          <b>Web e mobile</b><small>Acesso remoto</small>
+        </div>
+      </div>
+
+      <ul class="spec-list reveal">
+        <li><span class="k">Protocolo de campo</span><span class="v">Modbus</span></li>
+        <li><span class="k">Transporte</span><span class="v">MQTT</span></li>
+        <li><span class="k">Conectividade</span><span class="v">Ethernet, Wi-Fi ou 4G</span></li>
+        <li><span class="k">Nuvem</span><span class="v">AWS</span></li>
+        <li><span class="k">Variáveis</span><span class="v">Até 350</span></li>
+        <li><span class="k">Buffer local</span><span class="v">8 GB no gateway</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ Aplicações ======================================== -->
+  <section class="section" id="aplicacoes">
+    <div class="container">
+      <div class="sec-head is-center reveal">
+        <p class="eyebrow">Aplicações</p>
+        <h2>Um Infinity para cada operação.</h2>
+      </div>
+      <div class="apps">
+        <article class="app reveal">
+          <div class="app-body">
+            <p class="app-tag">Plant Control</p>
+            <h3>Uma planta. Uma visão.</h3>
+            <p>Integre equipamentos de diferentes fabricantes compatíveis em uma única plataforma e centralize a visão operacional.</p>
+            <ul>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Parque de equipamentos monitorado</li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Integração multimarcas compatível</li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Customização conforme a planta</li>
+            </ul>
+          </div>
+          <div class="app-media">
+            <picture>
+              <source srcset="assets/dashboard-plant.webp" type="image/webp">
+              <img src="assets/dashboard-plant.jpg" width="1200" height="570" loading="lazy" decoding="async" alt="Painel do Plant Control com vários equipamentos monitorados em uma única tela">
+            </picture>
+          </div>
+        </article>
+
+        <article class="app app--energy reveal">
+          <div class="app-body">
+            <p class="app-tag">Energy</p>
+            <h3>Transforme consumo em informação.</h3>
+            <p>Variáveis elétricas passam a fazer parte da análise operacional, apoiando o acompanhamento do comportamento energético.</p>
+            <div class="units"><span>kWh</span><span>kW</span><span>V</span><span>A</span><span>Hz</span><span>FP</span></div>
+            <p class="app-note">Requer medidor de energia. Disponível nos planos Energy e Plant Control.</p>
+          </div>
+          <div class="app-media">
+            <picture>
+              <source srcset="assets/dashboard-energy.webp" type="image/webp">
+              <img src="assets/dashboard-energy.jpg" width="1200" height="706" loading="lazy" decoding="async" alt="Dashboard de gestão energética do Infinity System com indicadores elétricos e histórico de consumo">
+            </picture>
+          </div>
+        </article>
+
+        <article class="app app--medical reveal">
+          <div class="app-body">
+            <p class="app-tag">Medical</p>
+            <h3>Monitoramento para ambientes críticos.</h3>
+            <p>Acompanhamento dedicado de temperaturas e variáveis relevantes em aplicações médico-hospitalares.</p>
+            <ul>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Dashboard dedicado</li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Registro de temperaturas em áreas críticas</li>
+              <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Monitoramento da sala de ressonância magnética</li>
+            </ul>
+          </div>
+          <div class="app-media med-figure">
+            <svg viewBox="0 0 300 190" role="img" aria-label="Ilustração de uma sala de ressonância magnética com sensores de temperatura ambiente e de processo">
+              <rect class="room" x="10" y="16" width="280" height="158" rx="16" stroke-width="1.4"/>
+              <circle class="bore" cx="176" cy="96" r="54" stroke-width="17"/>
+              <circle class="bore" cx="176" cy="96" r="30" stroke-width="1.4"/>
+              <rect x="120" y="140" width="112" height="9" rx="4.5" fill="#e7dff7"/>
+              <g>
+                <rect class="tag-bg" x="26" y="46" width="80" height="42" rx="11" stroke-width="1.3"/>
+                <text class="tag-v" x="40" y="68">18,3 °C</text>
+                <text class="tag-l" x="40" y="80">ambiente</text>
+              </g>
+              <g>
+                <rect class="tag-bg" x="26" y="108" width="80" height="42" rx="11" stroke-width="1.3"/>
+                <text class="tag-v" x="40" y="130">17,8 °C</text>
+                <text class="tag-l" x="40" y="142">processo</text>
+              </g>
+              <circle cx="258" cy="46" r="17" fill="#6b4bb0"/>
+              <image href="assets/infinity-mark-light.png" x="242" y="39" width="32" height="14"/>
+            </svg>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Segurança ========================================= -->
+  <section class="section section-tint">
+    <div class="container">
+      <div class="sec-head is-center reveal">
+        <p class="eyebrow">Segurança e disponibilidade</p>
+        <h2>Sua operação conectada. Seus dados protegidos.</h2>
+      </div>
+      <div class="sec-grid">
+        <article class="card reveal"><div class="ico-tile"><svg aria-hidden="true"><use href="#i-cloud"></use></svg></div><h3>Nuvem AWS</h3><p>Infraestrutura em nuvem para uma plataforma confiável e escalável.</p></article>
+        <article class="card reveal"><div class="ico-tile"><svg aria-hidden="true"><use href="#i-lock"></use></svg></div><h3>Criptografia</h3><p>Proteção das informações durante a comunicação e o armazenamento.</p></article>
+        <article class="card reveal"><div class="ico-tile"><svg aria-hidden="true"><use href="#i-sync"></use></svg></div><h3>Redundância</h3><p>Arquitetura preparada para ampliar a disponibilidade da plataforma.</p></article>
+        <article class="card reveal"><div class="ico-tile"><svg aria-hidden="true"><use href="#i-drive"></use></svg></div><h3>Armazenamento local</h3><p>O gateway mantém os dados localmente em situações de perda de conexão.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Planos ============================================ -->
+  <section class="section" id="planos">
+    <div class="container">
+      <div class="sec-head is-center reveal">
+        <p class="eyebrow">Planos Infinity</p>
+        <h2>Escolha a solução ideal para a sua operação.</h2>
+        <p>Valores mensais em destaque; o valor anual aparece como referência de contratação.</p>
+      </div>
+
+      <div class="plans">
+        <article class="plan reveal">
+          <div class="plan-ico"><svg aria-hidden="true"><use href="#i-gauge"></use></svg></div>
+          <h3>Exclusive</h3><p class="plan-sub">Essencial</p>
+          <p class="plan-price"><span class="cur">R$</span><span class="val">299</span><span class="per">/mês</span></p>
+          <p class="plan-annual">ou R$ 3.588/ano</p>
+          <ul>
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Monitoramento em tempo real</li>
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Automação remota: liga/desliga e set-point</li>
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Dashboard com gráficos e histórico</li>
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Alertas automáticos</li>
+          </ul>
+          <a class="btn plan-cta js-cta" data-cta="plano_exclusive" data-plan="Exclusive" href="#contato">Quero contratar</a>
+        </article>
+
+        <article class="plan plan--energy reveal">
+          <div class="plan-ico"><svg aria-hidden="true"><use href="#i-zap"></use></svg></div>
+          <h3>Energy</h3><p class="plan-sub">Gestão energética</p>
+          <p class="plan-price"><span class="cur">R$</span><span class="val">399</span><span class="per">/mês</span></p>
+          <p class="plan-annual">ou R$ 4.788/ano</p>
+          <ul>
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Tudo do Exclusive</li>
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Monitoramento energético</li>
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Indicadores elétricos</li>
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Informações para análise de consumo</li>
+          </ul>
+          <a class="btn plan-cta js-cta" data-cta="plano_energy" data-plan="Energy" href="#contato">Quero contratar</a>
+        </article>
+
+        <article class="plan plan--medical reveal">
+          <div class="plan-ico"><svg aria-hidden="true"><use href="#i-cross"></use></svg></div>
+          <h3>Medical</h3><p class="plan-sub">Aplicações críticas</p>
+          <p class="plan-price"><span class="cur">R$</span><span class="val">399</span><span class="per">/mês</span></p>
+          <p class="plan-annual">ou R$ 4.788/ano</p>
+          <ul>
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Tudo do Exclusive</li>
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Dashboard dedicado</li>
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Registro de temperaturas em áreas críticas</li>
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Monitoramento da sala de RM</li>
+          </ul>
+          <a class="btn plan-cta js-cta" data-cta="plano_medical" data-plan="Medical" href="#contato">Quero contratar</a>
+        </article>
+
+        <article class="plan plan--plant reveal">
+          <div class="plan-ico"><svg aria-hidden="true"><use href="#i-layers"></use></svg></div>
+          <h3>Plant Control</h3><p class="plan-sub">Gestão da planta</p>
+          <p class="plan-price"><span class="from">a partir de</span><span class="cur">R$</span><span class="val">999</span><span class="per">/mês</span></p>
+          <p class="plan-annual">ou R$ 11.988/ano</p>
+          <ul>
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Tudo do Exclusive</li>
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Parque de equipamentos monitorado</li>
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Equipamentos multimarcas compatíveis</li>
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Customização conforme a planta</li>
+            <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Monitoramento energético</li>
+          </ul>
+          <a class="btn plan-cta js-cta" data-cta="plano_plant_control" data-plan="Plant Control" href="#contato">Falar com um especialista</a>
+        </article>
+      </div>
+
+      <p class="plans-foot">Os planos Energy e Plant Control requerem medidor de energia. Consulte condições comerciais com a equipe Refrisat.</p>
+    </div>
+  </section>
+
+  <!-- ============ FAQ =============================================== -->
+  <section class="section section-tint" id="duvidas">
+    <div class="container">
+      <div class="sec-head is-center reveal">
+        <p class="eyebrow">Dúvidas frequentes</p>
+        <h2>O que costumam perguntar antes de contratar.</h2>
+      </div>
+      <div class="faq reveal">
+        <details>
+          <summary>O que é necessário para instalar o Infinity? <svg aria-hidden="true"><use href="#i-plus"></use></svg></summary>
+          <p>O Gateway Infinity é conectado ao CLP ou à IHM do equipamento por Modbus e precisa de uma via de comunicação com a internet — Ethernet, Wi-Fi ou 4G. A partir daí os dados passam a ser enviados para a nuvem e ficam disponíveis na plataforma.</p>
+        </details>
+        <details>
+          <summary>Funciona com equipamentos que não são Refrisat? <svg aria-hidden="true"><use href="#i-plus"></use></svg></summary>
+          <p>Sim. O plano Plant Control integra equipamentos de diferentes fabricantes compatíveis em uma única plataforma, com customização conforme a necessidade da planta.</p>
+        </details>
+        <details>
+          <summary>O que acontece se a internet cair? <svg aria-hidden="true"><use href="#i-plus"></use></svg></summary>
+          <p>O gateway mantém os dados localmente — são 8 GB de armazenamento — durante o período sem conexão, e envia as informações quando a comunicação é restabelecida.</p>
+        </details>
+        <details>
+          <summary>É possível ligar e desligar o equipamento à distância? <svg aria-hidden="true"><use href="#i-plus"></use></svg></summary>
+          <p>Sim, mediante controle autorizado. A automação remota permite ligar, desligar e alterar o set-point pela plataforma.</p>
+        </details>
+        <details>
+          <summary>O monitoramento de energia está incluso em todos os planos? <svg aria-hidden="true"><use href="#i-plus"></use></svg></summary>
+          <p>Não. O monitoramento energético faz parte dos planos Energy e Plant Control, e depende da instalação de um medidor de energia no equipamento.</p>
+        </details>
+        <details>
+          <summary>Quantas variáveis o sistema consegue acompanhar? <svg aria-hidden="true"><use href="#i-plus"></use></svg></summary>
+          <p>O gateway trabalha com até 350 variáveis, definidas conforme o equipamento e a aplicação.</p>
+        </details>
+        <details>
+          <summary>Onde ficam armazenados os dados? <svg aria-hidden="true"><use href="#i-plus"></use></svg></summary>
+          <p>Na nuvem AWS, com criptografia das informações em comunicação e armazenamento, e arquitetura preparada para ampliar a disponibilidade da plataforma.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Contato =========================================== -->
+  <section class="section section-dark contact" id="contato">
+    <div class="container contact-grid">
+      <div class="reveal">
+        <p class="eyebrow eyebrow-light">Fale com a Refrisat</p>
+        <h2 style="font-size:var(--fs-h2)">Vamos falar sobre a sua operação?</h2>
+        <p style="margin-top:var(--sp-4); font-size:var(--fs-lead)">Conte um pouco sobre a sua necessidade. A equipe Refrisat avalia a aplicação, entende os equipamentos envolvidos e indica a configuração Infinity mais adequada.</p>
+        <p class="contact-note" id="contact-context" role="status">Preencha o formulário ao lado e um especialista Infinity entra em contato.</p>
+        <ul class="contact-list">
+          <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Análise da aplicação</li>
+          <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Avaliação dos equipamentos</li>
+          <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Definição da solução e do plano</li>
+        </ul>
+      </div>
+
+      <div class="form-card reveal">
+        <div class="form-head">
+          <h3>Falar com um especialista</h3>
+          <span>Infinity System by Refrisat</span>
+        </div>
+        <div class="form-frame">
+          <div class="form-skeleton" id="form-skeleton"><div class="spinner" aria-hidden="true"></div><p>Carregando o formulário…</p></div>
+          <iframe id="ploomes-form" title="Formulário de contato — Infinity System"
+                  src="https://forms.ploomes.com/form/4e3b3aabeecc45ac935a021d79d59610?iframe=true"
+                  loading="lazy" allow="clipboard-write"></iframe>
+        </div>
+        <p class="form-legal">Ao enviar seus dados você declara ciência sobre o tratamento das informações conforme a <a href="politica-de-privacidade.html">Política de Privacidade</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Grupo HBR Holding Brasil ========================== -->
+  <section class="section group-section" id="grupo" aria-labelledby="grupo-titulo">
+    <div class="container">
+      <div class="group-head reveal">
+        <img class="group-lockup" src="assets/grupo/hbr-holding.svg" width="230" height="57" loading="lazy" alt="HBR Holding Brasil">
+        <h2 id="grupo-titulo" class="sr-only">HBR Holding Brasil</h2>
+        <span class="group-rule" aria-hidden="true"></span>
+        <p>O Infinity System é desenvolvido pela Refrisat, uma das empresas do grupo HBR Holding Brasil.</p>
+      </div>
+
+      <ul class="group-logos reveal">
+        <li><a href="https://hbr.net/" target="_blank" rel="noopener noreferrer"><img class="gl gl-hbr" src="assets/grupo/hbr.svg" width="241" height="91" loading="lazy" alt="HBR"></a></li>
+        <li><a href="https://hbr.net/aluguel/air-delivery/" target="_blank" rel="noopener noreferrer"><img class="gl gl-air" src="assets/grupo/air-delivery.svg" width="713" height="200" loading="lazy" alt="Air Delivery"></a></li>
+        <li><a href="https://oceanicabr.com/" target="_blank" rel="noopener noreferrer"><img class="gl gl-oce" src="assets/grupo/oceanica.svg" width="800" height="126" loading="lazy" alt="Oceânica"></a></li>
+        <li><a href="https://www.enerbr.com/" target="_blank" rel="noopener noreferrer">
+          <picture>
+            <source srcset="assets/grupo/ener.webp" type="image/webp">
+            <img class="gl gl-ener" src="assets/grupo/ener.png" width="600" height="162" loading="lazy" alt="Ener">
+          </picture>
+        </a></li>
+        <li><a href="https://tegris.com.br/" target="_blank" rel="noopener noreferrer"><img class="gl gl-teg" src="assets/grupo/tegris.svg" width="159" height="60" loading="lazy" alt="Tegris Telemétrica"></a></li>
+        <li><a href="https://fieldlink.me/" target="_blank" rel="noopener noreferrer"><img class="gl gl-fld" src="assets/grupo/fieldlink.svg" width="414" height="82" loading="lazy" alt="Fieldlink"></a></li>
+        <li><a href="https://refrisat.com.br/" target="_blank" rel="noopener noreferrer"><img class="gl gl-ref" src="assets/grupo/refrisat.svg" width="509" height="134" loading="lazy" alt="Refrisat"></a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<!-- ============ Footer ============================================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <picture>
+          <source srcset="assets/infinity-logo-light.webp" type="image/webp">
+          <img src="assets/infinity-logo-light.png" width="128" height="92" loading="lazy" alt="Infinity System">
+        </picture>
+        <p class="footer-by"><span>by</span> <img src="assets/refrisat-white.svg" width="104" height="27" loading="lazy" alt="Refrisat"></p>
+        <p>Monitoramento, automação remota e inteligência operacional para equipamentos e plantas industriais.</p>
+      </div>
+      <nav class="footer-col" aria-label="Plataforma">
+        <h4>Plataforma</h4>
+        <ul>
+          <li><a href="#plataforma">A plataforma</a></li>
+          <li><a href="#recursos">Recursos</a></li>
+          <li><a href="#como-funciona">Como funciona</a></li>
+          <li><a href="#aplicacoes">Aplicações</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Comercial">
+        <h4>Comercial</h4>
+        <ul>
+          <li><a href="#planos">Planos e preços</a></li>
+          <li><a href="#duvidas">Dúvidas frequentes</a></li>
+          <li><a class="js-cta" data-cta="footer" href="#contato">Falar com um especialista</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Refrisat">
+        <h4>Refrisat</h4>
+        <ul>
+          <li><a href="https://refrisat.com.br/" target="_blank" rel="noopener noreferrer">Site institucional</a></li>
+          <li><a href="https://hbr.net/" target="_blank" rel="noopener noreferrer">HBR Holding Brasil</a></li>
+          <li><a href="politica-de-privacidade.html">Política de Privacidade</a></li>
+          <li><a href="politica-de-cookies.html">Política de Cookies</a></li>
+          <li><a href="termos-de-uso.html">Termos de Uso</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="ano">2026</span> Refrisat. Todos os direitos reservados.</p>
+      <p>Infinity System — monitoramento e automação remota.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ Dados estruturados ================================== -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"Organization",
+      "@id":"https://goinfinity.com.br/#org",
+      "name":"Refrisat",
+      "url":"https://refrisat.com.br/",
+      "logo":"https://goinfinity.com.br/assets/favicon-512.png"
+    },
+    {
+      "@type":"WebSite",
+      "@id":"https://goinfinity.com.br/#site",
+      "url":"https://goinfinity.com.br/",
+      "name":"Infinity System by Refrisat",
+      "inLanguage":"pt-BR",
+      "publisher":{"@id":"https://goinfinity.com.br/#org"}
+    },
+    {
+      "@type":"Product",
+      "name":"Infinity System",
+      "brand":{"@id":"https://goinfinity.com.br/#org"},
+      "description":"Plataforma de monitoramento em tempo real, automação remota e gestão energética para chillers e equipamentos industriais.",
+      "image":"https://goinfinity.com.br/assets/og-infinity.jpg",
+      "offers":[
+        {"@type":"Offer","name":"Exclusive","price":"299","priceCurrency":"BRL","availability":"https://schema.org/InStock","url":"https://goinfinity.com.br/#planos"},
+        {"@type":"Offer","name":"Energy","price":"399","priceCurrency":"BRL","availability":"https://schema.org/InStock","url":"https://goinfinity.com.br/#planos"},
+        {"@type":"Offer","name":"Medical","price":"399","priceCurrency":"BRL","availability":"https://schema.org/InStock","url":"https://goinfinity.com.br/#planos"},
+        {"@type":"Offer","name":"Plant Control","price":"999","priceCurrency":"BRL","availability":"https://schema.org/InStock","url":"https://goinfinity.com.br/#planos"}
+      ]
+    },
+    {
+      "@type":"FAQPage",
+      "mainEntity":[
+        {"@type":"Question","name":"O que é necessário para instalar o Infinity?","acceptedAnswer":{"@type":"Answer","text":"O Gateway Infinity é conectado ao CLP ou à IHM do equipamento por Modbus e precisa de uma via de comunicação com a internet — Ethernet, Wi-Fi ou 4G."}},
+        {"@type":"Question","name":"Funciona com equipamentos que não são Refrisat?","acceptedAnswer":{"@type":"Answer","text":"Sim. O plano Plant Control integra equipamentos de diferentes fabricantes compatíveis em uma única plataforma."}},
+        {"@type":"Question","name":"O que acontece se a internet cair?","acceptedAnswer":{"@type":"Answer","text":"O gateway mantém os dados localmente — 8 GB de armazenamento — e envia as informações quando a conexão é restabelecida."}},
+        {"@type":"Question","name":"É possível ligar e desligar o equipamento à distância?","acceptedAnswer":{"@type":"Answer","text":"Sim, mediante controle autorizado. A automação remota permite ligar, desligar e alterar o set-point pela plataforma."}},
+        {"@type":"Question","name":"O monitoramento de energia está incluso em todos os planos?","acceptedAnswer":{"@type":"Answer","text":"Não. Faz parte dos planos Energy e Plant Control e depende da instalação de um medidor de energia."}},
+        {"@type":"Question","name":"Quantas variáveis o sistema consegue acompanhar?","acceptedAnswer":{"@type":"Answer","text":"O gateway trabalha com até 350 variáveis, definidas conforme o equipamento e a aplicação."}},
+        {"@type":"Question","name":"Onde ficam armazenados os dados?","acceptedAnswer":{"@type":"Answer","text":"Na nuvem AWS, com criptografia das informações em comunicação e armazenamento."}}
+      ]
+    }
+  ]
+}
+</script>
+
+<script src="script.js" defer></script>
+</body>
+</html>
