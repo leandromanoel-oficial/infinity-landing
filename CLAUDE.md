@@ -133,6 +133,14 @@ Control a partir de R$ 999. Conferidos em 03/09/2026. Os mesmos valores
 alimentam as `Offer` do JSON-LD no `index.html` — **alterar preço exige alterar
 os dois lugares**.
 
+**Botão "Login" no header** aponta para `https://infinity-refrisat.com/` (a
+aplicação Infinity, domínio separado) com `target="_blank" rel="noopener"` —
+abre em nova aba de propósito, para que a aba do `goinfinity.com.br` nunca seja
+navegada para fora. Não dá para mascarar a barra de endereço numa navegação
+real; mascarar exigiria proxy reverso da app inteira sob o goinfinity (frágil:
+cookies, OAuth, URLs absolutas). Não está na CSP porque é navegação de
+topo, não iframe/fetch.
+
 **Formulário Ploomes** integrado e funcionando. O iframe é cross-origin: a
 landing só acrescenta parâmetros à URL, não preenche campos por JavaScript. Se
 um parâmetro parar de chegar ao CRM, o problema está na configuração do

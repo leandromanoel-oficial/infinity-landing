@@ -212,6 +212,7 @@ strong,b { font-weight:700; }
 .main-nav a:hover::after, .main-nav a[aria-current="true"]::after { transform:scaleX(1); }
 .main-nav a[aria-current="true"] { color:var(--blue-700); }
 .header-cta { flex:none; min-height:42px; padding-inline:1.05rem; font-size:var(--fs-xs); }
+.header-login { flex:none; min-height:42px; padding-inline:1.05rem; font-size:var(--fs-xs); }
 .main-nav .mobile-cta { display:none; }   /* só aparece no menu colapsado */
 
 .nav-toggle {
@@ -640,7 +641,7 @@ strong,b { font-weight:700; }
   .main-nav a::after { display:none; }
   .main-nav .mobile-cta { display:block; margin-top:var(--sp-4); }
   .main-nav .mobile-cta a { border-bottom:0; padding:0 1.4rem; }
-  .header-cta { display:none; }
+  .header-cta, .header-login { display:none; }
   .nav-toggle { display:flex; }
   .brand-mark { width:88px; } .brand-refrisat { width:82px; }
 }
