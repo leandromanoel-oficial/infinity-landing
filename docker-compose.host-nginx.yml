@@ -1,0 +1,35 @@
+# =============================================================================
+#  PRODUÇÃO — Infinity System landing (goinfinity.com.br)
+#  Modelo: nginx no HOST + certbot (VPS da Refrisat / HBR Holding).
+#
+#  Diferente do docker-compose.prod.yml (que é para VPS com Traefik + Portainer).
+#  Aqui o container só serve o estático numa porta de loopback; quem faz TLS,
+#  redirect HTTP->HTTPS e cabeçalhos de segurança é o nginx do host —
+#  ver deploy/goinfinity-proxy.conf.
+#
+#  Uso na VPS:
+#    cd /opt/infinity-landing
+#    docker compose -f docker-compose.host-nginx.yml up -d --build
+#
+#  Republicação:
+#    cd /opt/infinity-landing && git pull && \
+#      docker compose -f docker-compose.host-nginx.yml up -d --build
+#
+#  O build.py roda dentro do Dockerfile (python:3.12-alpine), então a VPS só
+#  precisa de Docker — nada de Python instalado no host.
+# =============================================================================
+
+name: infinity-landing
+
+services:
+  landing:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile
+    image: infinity-landing:latest
+    pull_policy: build
+    container_name: infinity-landing
+    restart: unless-stopped
+    # Só no loopback. O nginx do host é o único que fala com a internet.
+    ports:
+      - "127.0.0.1:8081:80"
