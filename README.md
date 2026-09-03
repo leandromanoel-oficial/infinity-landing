@@ -249,10 +249,18 @@ seções escuras (contato e rodapé).
 - `chiller.png` tem apenas **247×206 px** depois do recorte. Serve na
   arquitetura (renderizado a ~134 px), mas não suporta uso em destaque. Um
   render em resolução maior permitiria voltar a usá-lo no hero.
-- O logo é um **raster de baixa qualidade**, com serrilhado visível ao ampliar,
-  e a assinatura traz "Infinitas **váriaveis**" (grafia incorreta de
-  *variáveis*). Uma versão vetorial (SVG) corrigida resolveria os dois
-  problemas de uma vez.
+- O logo foi **regerado em 03/09/2026** a partir dos arquivos limpos em
+  `LOGOS/Infinity/` (`FINAL INFINITY-02.png`, 2481², canal alpha; `INFINITY.png`).
+  O serrilhado sumiu. Fluxo: recorte por bounding box das faixas (símbolo +
+  wordmark + assinatura, excluindo o selo "HBR Holding Brasil"), versão escura
+  gerada por recolorização do master branco para o navy do logo `#2b4b6b`, e
+  `fit: contain` nas mesmas dimensões dos assets antigos (logo 640×461, símbolo
+  400×171) — nenhuma mudança de HTML/CSS foi necessária. Os favicons **não**
+  foram trocados: o símbolo tem traço fino demais e some a 16 px; seguem no
+  raster serrilhado anterior.
+- A assinatura ainda traz "Infinitas **váriaveis**" (grafia incorreta de
+  *variáveis*) — o arquivo de origem já vem assim. Corrigir exige editar o
+  vetor na origem (Refrisat).
 - A imagem do gateway exibe a marca **Plant Evolution PE100S**, de outro
   fabricante, sob o rótulo "Infinity Gateway". Definir se essa é a
   apresentação desejada.

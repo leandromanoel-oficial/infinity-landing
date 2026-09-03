@@ -156,8 +156,10 @@ preencheu.
   monitoramento efetivo da caixa `dpo@refrisat.com.br`.
 - SEO: `goinfinity.com.br` é domínio novo, sem autoridade herdada. Pedir link
   do site institucional e cadastrar no Google Search Console.
-- Logo Infinity **vetorial**: o atual é raster com serrilhado, e a assinatura
-  traz "Infinitas **váriaveis**" (grafia incorreta de *variáveis*).
+- Logo Infinity **vetorial**: os assets foram regerados em 03/09/2026 de
+  `LOGOS/Infinity/` (raster limpo, sem serrilhado), mas um SVG ainda seria
+  melhor. A assinatura segue com "Infinitas **váriaveis**" (grafia incorreta de
+  *variáveis*) — vem assim do arquivo de origem.
 - Render maior do `chiller.png` (hoje 247×206 px após o recorte).
 - Vetor da Ener — única marca do grupo sem arquivo vetorial.
 - Definir se a imagem do gateway deve exibir a marca **Plant Evolution PE100S**,
