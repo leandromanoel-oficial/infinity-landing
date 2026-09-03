@@ -313,10 +313,17 @@ esses fora do contexto de build.
 
 ### 2. DNS
 
-`A` do apex `goinfinity.com.br` → `187.127.41.11` — **já configurado.** O
-Traefik valida o ACME por HTTP-01 na porta 80; o desafio precisa resolver para
-a VPS antes do deploy. (O `www` é opcional: se criar o `A` do `www`, a stack já
-o redireciona para o apex; sem ele, só o apex responde.)
+`A` do apex `goinfinity.com.br` → `187.127.41.11`.
+
+> **Apague os registros `AAAA` (IPv6).** O domínio vinha com `AAAA` apontando
+> para `2001:12ff:0:2::95` (parking do Registro.br). O Let's Encrypt, quando
+> existe `AAAA`, valida o desafio HTTP-01 **por IPv6 primeiro** — cai no parking,
+> recebe 404 e a emissão falha, mesmo com o `A` correto. A VPS não tem IPv6 no
+> Traefik, então o `AAAA` tem de sair (apex e `www`).
+
+O `www` **não é usado** — não há registro DNS nem router para ele. Para
+habilitar depois: criar `A www.goinfinity.com.br → 187.127.41.11` (sem `AAAA`)
+e readicionar o router `infinity-www` no `docker-compose.prod.yml`.
 
 ### 3. Stack no Portainer
 
