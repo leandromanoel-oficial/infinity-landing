@@ -1,9 +1,18 @@
 # Migração da landing para a VPS da Refrisat / HBR Holding
 
+> **Status: concluída em 03/09/2026.** `https://goinfinity.com.br` serve da VPS
+> `72.61.44.210` (nginx do host + certbot). Cert Let's Encrypt `CN=goinfinity.com.br`
+> emitido, redirect HTTP→HTTPS ativo, headers de segurança conferidos,
+> `refrisizing.refrisat.com.br` intacto. DNS autoritativo (Registro.br) e
+> resolvers públicos já apontam para o IP novo. Este doc fica como referência do
+> que foi feito e de como republicar.
+
 Origem: VPS `nnoconn.com.br` (187.127.41.11), Portainer Git Stack + Traefik.
 Destino: VPS `srv1202507.hstgr.cloud` (Hostinger) da Refrisat.
 Domínio: **continua `goinfinity.com.br`**, só repontando o DNS.
-Repositório: `https://github.com/hbr-holding/infinity-landing`.
+Repositório: `https://github.com/hbr-holding/infinity-landing` (privado; a VPS
+clona por **deploy key** read-only — `~/.ssh/infinity_deploy`, alias
+`github-infinity` no `~/.ssh/config` da VPS).
 
 ## Retrato da VPS de destino (inspecionado em 03/09/2026)
 

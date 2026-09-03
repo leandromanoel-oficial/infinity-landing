@@ -18,11 +18,15 @@ assets/         imagens tratadas (PNG com transparência + WebP) e fontes
 https://goinfinity.com.br
 ```
 
-Domínio próprio, não subdomínio da Refrisat. O `A` do apex já aponta para a
-VPS `nnoconn.com.br` (187.127.41.11), onde a landing roda em container atrás
-do Traefik. Já aplicado em `<link rel="canonical">`, `og:url`,
-`og:image`, `twitter:image`, no bloco JSON-LD do `index.html` e no `canonical`
-das três páginas legais.
+Domínio próprio, não subdomínio da Refrisat. O `A` do apex aponta para a
+**VPS da Refrisat / HBR Holding** (`srv1202507.hstgr.cloud`, `72.61.44.210`),
+onde a landing roda em container atrás do nginx do host — ver **Deploy**.
+Já aplicado em `<link rel="canonical">`, `og:url`, `og:image`, `twitter:image`,
+no bloco JSON-LD do `index.html` e no `canonical` das três páginas legais.
+
+> Migrado da VPS de teste `nnoconn.com.br` (187.127.41.11, Portainer + Traefik)
+> em 03/09/2026. Passo a passo e retrato da VPS de destino em
+> `deploy/MIGRACAO-REFRISAT.md`.
 
 Consequência de SEO a considerar: por ser domínio novo e sem histórico, ele
 não herda autoridade de `refrisat.com.br`. Vale um link do site institucional
@@ -285,17 +289,25 @@ seções escuras (contato e rodapé).
 
 ## Deploy
 
-Destino: **VPS `nnoconn.com.br`** (187.127.41.11), um container `nginx:alpine`
-atrás do **Traefik** já existente, gerenciado pelo **Portainer como Git Stack**
-— mesmo padrão do stack da Acuvia. A aplicação Infinity continua onde está; a
-landing ganhará depois um botão apontando para ela.
+**Em produção desde 03/09/2026 na VPS da Refrisat / HBR Holding**
+(`srv1202507.hstgr.cloud`, `72.61.44.210`). Modelo: container só serve o
+estático numa porta de loopback; o **nginx do host** faz proxy, TLS
+(**certbot**) e cabeçalhos de segurança. Não há Portainer nem Traefik nessa
+VPS. Retrato completo da máquina e passo a passo da migração em
+**`deploy/MIGRACAO-REFRISAT.md`**.
+
+Repositório: `git@github.com:hbr-holding/infinity-landing.git` (privado). A VPS
+clona por **deploy key** read-only (`~/.ssh/infinity_deploy`, alias
+`github-infinity` no `~/.ssh/config`).
 
 ```
-docker-compose.prod.yml   stack Portainer/Traefik — router, TLS, redirects, headers
-deploy/Dockerfile         estágio 1: build.py monta dist/ · estágio 2: nginx:alpine
-deploy/nginx.conf         server block interno (porta 80): rotas, 404, cache, gzip
-deploy/build.py           monta dist/ e o tar.gz (também roda dentro do Dockerfile)
-deploy/goinfinity.conf    LEGADO — server block nginx standalone + certbot, não usado
+docker-compose.host-nginx.yml   PROD — container em 127.0.0.1:8081, sem Traefik
+deploy/goinfinity-proxy.conf    vhost do nginx do host: proxy + headers; certbot adiciona o 443
+deploy/Dockerfile               estágio 1: build.py monta dist/ · estágio 2: nginx:alpine
+deploy/nginx.conf               server block interno do container (porta 80): rotas, 404, cache, gzip
+deploy/build.py                 monta dist/ e o tar.gz (também roda dentro do Dockerfile)
+docker-compose.prod.yml         modelo antigo (Portainer + Traefik) — não usado na VPS atual
+deploy/goinfinity.conf          LEGADO — nginx standalone servindo arquivo direto, não usado
 ```
 
 O `build.py` roda **dentro da imagem**: copia para o webroot apenas o que a
@@ -304,68 +316,41 @@ página usa (as cinco páginas, `styles.css`, `script.js`, `robots.txt`,
 `_backup-original/`, `deploy/`, este README e ~2,5 MB de assets órfãos. O
 `dist/` local **não precisa ser versionado nem gerado à mão** para publicar.
 
-### 1. Repositório
+### Estrutura na VPS
 
-O Portainer clona de um repositório Git. Iniciar um e subir para o GitHub:
+| Local | O quê |
+|---|---|
+| `/opt/infinity-landing` | clone do repo (segue o padrão do `/opt/refrisizing` deles) |
+| container `infinity-landing` | `restart: unless-stopped`, publica em `127.0.0.1:8081` |
+| `/etc/nginx/sites-available/goinfinity.com.br` | vhost (proxy → `:8081` + headers + 443 do certbot) |
+| `/etc/letsencrypt/live/goinfinity.com.br/` | certificado, renovado pelo `certbot.timer` (systemd) |
 
+### DNS
+
+`A goinfinity.com.br → 72.61.44.210`. **Sem registro `AAAA`** — o nginx do host
+só escuta IPv4; um `AAAA` publicado faz o Let's Encrypt validar por IPv6 e
+falhar a emissão. `www` não é usado.
+
+### Republicação
+
+```bash
+cd /opt/infinity-landing && git pull && \
+  docker compose -f docker-compose.host-nginx.yml up -d --build
 ```
-git init
-git add .
-git commit -m "landing pronta para deploy via Traefik"
-git remote add origin git@github.com:<org>/infinity-landing.git
-git push -u origin main
-```
 
-`.gitignore` já ignora `dist/`, `*.tar.gz` e `LOGOS/`; `.dockerignore` mantém
-esses fora do contexto de build.
+O `build.py` roda de novo na build da imagem. O HTML é servido com `no-cache`,
+então a nova versão aparece na hora; CSS, JS e imagens têm cache de 30 dias — se
+trocar uma imagem mantendo o nome, visitantes recorrentes podem ver a antiga até
+o cache expirar. Para forçar, renomeie o arquivo.
 
-### 2. DNS
+> **CSP e cabeçalhos de segurança** moram no vhost do host
+> (`/etc/nginx/sites-available/goinfinity.com.br`, template em
+> `deploy/goinfinity-proxy.conf`), **não** no `deploy/nginx.conf` do container.
+> Mudou a CSP → muda lá, e provavelmente na Política de Cookies.
 
-`A` do apex `goinfinity.com.br` → `187.127.41.11`.
-
-> **Apague os registros `AAAA` (IPv6).** O domínio vinha com `AAAA` apontando
-> para `2001:12ff:0:2::95` (parking do Registro.br). O Let's Encrypt, quando
-> existe `AAAA`, valida o desafio HTTP-01 **por IPv6 primeiro** — cai no parking,
-> recebe 404 e a emissão falha, mesmo com o `A` correto. A VPS não tem IPv6 no
-> Traefik, então o `AAAA` tem de sair (apex e `www`).
-
-O `www` **não é usado** — não há registro DNS nem router para ele. Para
-habilitar depois: criar `A www.goinfinity.com.br → 187.127.41.11` (sem `AAAA`)
-e readicionar o router `infinity-www` no `docker-compose.prod.yml`.
-
-### 3. Stack no Portainer
-
-1. Portainer → **Stacks** → **Add Stack** → nome `infinity-landing`
-2. Build method: **Repository** · URL do repo · reference `refs/heads/main`
-3. Compose path: `docker-compose.prod.yml`
-4. **Environment variables** (todas têm default; confira só a segunda):
-   ```
-   DOMAIN=goinfinity.com.br
-   TRAEFIK_CERTRESOLVER=letsencrypt   # nome do resolver ACME — conferir em /docker/traefik/
-   ```
-5. **Deploy the stack.** No primeiro deploy o Traefik pede o certificado
-   Let's Encrypt e grava em `acme.json`.
-
-**HTTPS e renovação são automáticos** — o Traefik renova o certificado sozinho
-antes de expirar. Não há certbot, nem cron, nem nada a fazer depois.
-
-O `docker-compose.prod.yml` cuida de: router HTTPS no apex, redirect
-`www`→apex (301), redirect HTTP→HTTPS (301) e os cabeçalhos de segurança
-(HSTS, CSP, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`)
-via middleware. O `deploy/nginx.conf` do container só faz roteamento de URL sem
-`.html`, o `404.html` próprio, cache por tipo de arquivo e gzip.
-
-> Ao mexer na **CSP**, o arquivo vivo é o label
-> `traefik.http.middlewares.infinity-headers.headers.customResponseHeaders.Content-Security-Policy`
-> no `docker-compose.prod.yml` — não o `goinfinity.conf`.
-
-### 4. Republicação
-
-`git commit` + `git push` → Portainer → **Pull and redeploy**. O `build.py`
-roda de novo na build da imagem. O HTML é servido com `no-cache`, então a nova
-versão aparece na hora; CSS, JS e imagens têm cache de 30 dias — se trocar uma
-imagem mantendo o nome, visitantes recorrentes podem ver a antiga até o cache
-expirar. Para forçar, renomeie o arquivo.
+> **1 vCPU, sem swap.** O build é leve, mas roda em série com o `refrisizing`.
+> Se um rebuild der OOM, criar um swapfile de 2 GB antes (ver
+> `deploy/MIGRACAO-REFRISAT.md`).
 
 ### Gerar o tar.gz avulso (opcional)
 
@@ -413,8 +398,8 @@ manutenção de longo prazo.
 
 ### Depois de publicar
 
-13. `https://www.goinfinity.com.br` e `http://goinfinity.com.br` redirecionam
-    para `https://goinfinity.com.br`.
+13. `http://goinfinity.com.br` redireciona (301) para `https://goinfinity.com.br`.
+    (`www` não tem DNS nem vhost — não é testado.)
 14. Uma URL inexistente cai no `404.html` da página, não no 404 padrão do nginx.
 15. `/politica-de-privacidade` (sem `.html`) resolve.
 16. O formulário do Ploomes carrega — se a CSP estiver errada, o iframe fica em
