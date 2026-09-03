@@ -10,11 +10,18 @@
 #
 #    DOMAIN                = goinfinity.com.br
 #    TRAEFIK_CERTRESOLVER  = letsencrypt   (o nome do resolver ACME no Traefik;
-#                                           confira em /docker/traefik/)
+#                                           confirmado em /docker/traefik/)
 #
 #  HTTPS + renovação automática: feitos pelo Traefik via ACME/Let's Encrypt
 #  (tls.certresolver abaixo). O Traefik renova sozinho antes de expirar e
 #  grava em acme.json. Nada de certbot.
+#
+#  ATENÇÃO — só o APEX. Não há router para www.goinfinity.com.br porque `www`
+#  não tem registro DNS. Criar um router de www sem o A/AAAA correspondente faz
+#  o Traefik entrar em loop de falha no desafio ACME (e conta pro rate limit de
+#  validações do Let's Encrypt). Para habilitar www no futuro: criar o
+#  `A www.goinfinity.com.br -> 187.127.41.11` (sem AAAA), e então adicionar de
+#  volta o router `infinity-www` + o middleware `infinity-to-apex`.
 # =============================================================================
 
 networks:
@@ -43,17 +50,10 @@ services:
       - "traefik.http.routers.infinity.tls.certresolver=${TRAEFIK_CERTRESOLVER:-letsencrypt}"
       - "traefik.http.routers.infinity.middlewares=infinity-headers"
 
-      # ---- Router HTTPS: www -> apex (301) -----------------------------
-      - "traefik.http.routers.infinity-www.rule=Host(`www.${DOMAIN:-goinfinity.com.br}`)"
-      - "traefik.http.routers.infinity-www.entrypoints=websecure"
-      - "traefik.http.routers.infinity-www.tls=true"
-      - "traefik.http.routers.infinity-www.tls.certresolver=${TRAEFIK_CERTRESOLVER:-letsencrypt}"
-      - "traefik.http.routers.infinity-www.middlewares=infinity-to-apex"
-
-      # ---- Router HTTP: tudo na :80 -> HTTPS (301) ---------------------
+      # ---- Router HTTP: apex na :80 -> HTTPS (301) --------------------
       # Redundante se o Traefik já tem redirect global na entrypoint `web`,
       # mas inofensivo e deixa o stack autossuficiente.
-      - "traefik.http.routers.infinity-http.rule=Host(`${DOMAIN:-goinfinity.com.br}`) || Host(`www.${DOMAIN:-goinfinity.com.br}`)"
+      - "traefik.http.routers.infinity-http.rule=Host(`${DOMAIN:-goinfinity.com.br}`)"
       - "traefik.http.routers.infinity-http.entrypoints=web"
       - "traefik.http.routers.infinity-http.middlewares=infinity-to-https"
 
@@ -63,10 +63,6 @@ services:
       # ---- Middlewares -------------------------------------------------
       - "traefik.http.middlewares.infinity-to-https.redirectscheme.scheme=https"
       - "traefik.http.middlewares.infinity-to-https.redirectscheme.permanent=true"
-
-      - "traefik.http.middlewares.infinity-to-apex.redirectregex.regex=^https?://www\\.${DOMAIN:-goinfinity.com.br}/(.*)"
-      - "traefik.http.middlewares.infinity-to-apex.redirectregex.replacement=https://${DOMAIN:-goinfinity.com.br}/$${1}"
-      - "traefik.http.middlewares.infinity-to-apex.redirectregex.permanent=true"
 
       # Cabeçalhos de segurança (o que o goinfinity.conf punha no nginx).
       # HSTS: 1 ano + includeSubDomains. Só some se você trocar o resolver
