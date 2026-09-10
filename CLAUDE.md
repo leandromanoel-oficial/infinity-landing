@@ -95,14 +95,28 @@ LFS.
 
 ## Decisões firmadas — não reverter sem falar com o Leandro
 
-**Sem banner de consentimento.** O `script.js` usa **apenas `sessionStorage`**
-(`infinity_utm_current`, `infinity_cta_context`). O `localStorage` de
-first-touch UTM foi removido deliberadamente em 03/09/2026 para dispensar
-consentimento: sem armazenamento persistente, não há o que consentir. Custo
-aceito: perde-se atribuição de primeira origem entre visitas. **A Política de
-Cookies descreve exatamente esse comportamento** — qualquer mudança no
-armazenamento do script exige mudança correspondente no documento, e provavelmente
-um banner.
+**Sem banner, com atribuição first-touch persistente (revisto em 10/09/2026).**
+O `script.js` usa:
+- `sessionStorage` — `infinity_utm_current` (last-touch da visita), `infinity_cta_context`;
+- `localStorage` — `infinity_utm_first` (first-touch: UTMs + `gclid`/`fbclid`/`msclkid` + referrer, **TTL 90 dias**, expira sozinho), `infinity_utm_optout` (oposição do visitante).
+
+O first-touch foi **reintroduzido** a pedido do Leandro para justificar verba de
+mídia. Base legal adotada: **legítimo interesse** (LGPD Art. 7º, IX) — dado de
+origem, não identifica a pessoa, sem cookie de terceiro, sem perfil
+comportamental, sem rastreio cross-site. Em vez de banner: **opt-out** via botão
+na Política de Cookies (`#campanha-optout` → `window.infinityCampanhaOptOut()`),
+que apaga e bloqueia o `localStorage`. Por isso a `politica-de-cookies.html`
+agora **carrega `script.js`** (`defer`; todos os seletores da landing são
+guardados por `if`, roda inócuo).
+
+Pendência: **chancela do DPO** (`dpo@refrisat.com.br`) sobre o enquadramento em
+legítimo interesse. Se o DPO exigir consentimento, trocar o opt-out por gate de
+opt-in (banner) — a lógica no `script.js` já isola a gravação persistente num
+único ponto (`if (optedOut()) ... else if (...) store.set(localStorage, FIRST_KEY ...)`).
+
+**As duas políticas descrevem exatamente esse comportamento** — qualquer
+mudança no armazenamento do script exige mudança correspondente nos dois
+documentos. Mapeamento dos parâmetros no Ploomes: `deploy/UTM-PERSISTENTE.md`.
 
 **Nada de analytics, pixel ou GTM** sem revisar, juntos: a Política de Cookies,
 a Política de Privacidade e a CSP do `deploy/goinfinity.conf`. O `script.js`

@@ -36,7 +36,7 @@
 <main class="legal-doc">
   <p class="kicker">Armazenamento</p>
   <h1>Política de Cookies e Tecnologias Similares</h1>
-  <p class="doc-meta">Última atualização: 3 de setembro de 2026.</p>
+  <p class="doc-meta">Última atualização: 10 de setembro de 2026.</p>
 
   <p>Esta página descreve as tecnologias de armazenamento utilizadas na
      landing page do <strong>Infinity System</strong>. Ela complementa a
@@ -47,44 +47,91 @@
 
   <div class="controller">
     <p><strong>Resumo:</strong> esta landing page não utiliza cookies de
-       terceiros, não faz publicidade comportamental, não instala Google
-       Analytics, Meta Pixel ou LinkedIn Insight Tag, e não guarda nada no
-       navegador depois que a aba é fechada. Por isso não há banner de
-       consentimento — não existe escolha a ser feita.</p>
+       terceiros, não faz publicidade comportamental e não instala Google
+       Analytics, Meta Pixel ou LinkedIn Insight Tag. Ela guarda no seu
+       navegador, por até 90 dias, apenas a <strong>origem de campanha</strong>
+       da sua primeira visita (parâmetros da URL, como <code>utm_source</code>),
+       para creditar corretamente a campanha caso você volte depois e preencha
+       o formulário. Esse registro não identifica você e não é compartilhado
+       com terceiros para publicidade. Você pode desativá-lo a qualquer momento
+       na <a href="#atribuicao-campanha">seção 6</a>.</p>
   </div>
 
   <h2>1. O que é utilizado</h2>
-  <p>A página utiliza exclusivamente <code>sessionStorage</code>, um
-     armazenamento de escopo de sessão do próprio navegador. Ele guarda dois
-     itens, ambos apagados automaticamente ao fechar a aba:</p>
-  <ul>
-    <li><code>infinity_utm_current</code> — os parâmetros UTM da URL de
-        entrada, para que o formulário registre a campanha de origem mesmo
-        que o visitante navegue pelas seções antes de preencher;</li>
-    <li><code>infinity_cta_context</code> — qual botão comercial foi clicado e
-        o plano de interesse correspondente, para que o contato chegue ao CRM
-        com esse contexto.</li>
-  </ul>
-  <p>Nenhum dos dois identifica o visitante: guardam a origem da visita, não a
-     pessoa. Não há identificador único, nem leitura entre visitas
-     diferentes.</p>
+  <p>A página utiliza o armazenamento local do próprio navegador
+     (<code>sessionStorage</code> e <code>localStorage</code>), sem cookies
+     próprios. São guardados os itens abaixo:</p>
+  <table class="cookie-table">
+    <thead>
+      <tr><th>Item</th><th>Onde</th><th>Prazo</th><th>Para quê</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>infinity_utm_current</code></td>
+        <td>sessão</td>
+        <td>até fechar a aba</td>
+        <td>parâmetros de campanha da URL da visita atual (last-touch), para o
+            formulário registrar a origem mesmo que você navegue pelas seções
+            antes de preencher</td>
+      </tr>
+      <tr>
+        <td><code>infinity_cta_context</code></td>
+        <td>sessão</td>
+        <td>até fechar a aba</td>
+        <td>qual botão comercial foi clicado e o plano de interesse, para o
+            contato chegar ao CRM com esse contexto</td>
+      </tr>
+      <tr>
+        <td><code>infinity_utm_first</code></td>
+        <td>persistente</td>
+        <td>90 dias</td>
+        <td>a origem de campanha da sua <strong>primeira</strong> visita
+            (first-touch): parâmetros UTM, identificadores de clique de anúncio
+            — <code>gclid</code>, <code>fbclid</code>, <code>msclkid</code> — e
+            a página de referência. Permite creditar a campanha se você voltar
+            dias depois, por acesso direto ou orgânico, e só então converter</td>
+      </tr>
+      <tr>
+        <td><code>infinity_utm_optout</code></td>
+        <td>persistente</td>
+        <td>até você remover</td>
+        <td>registra que você desativou a atribuição de campanha (seção 5)</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Nenhum desses itens identifica você: guardam a origem da visita, não a
+     pessoa. Não há identificador único de usuário, login, e-mail ou perfil de
+     comportamento, e nada é lido por outros sites.</p>
 
   <h2>2. O que não é utilizado</h2>
   <ul>
     <li>cookies de publicidade ou de redes sociais;</li>
-    <li>ferramentas de analytics ou mapas de calor;</li>
-    <li><code>localStorage</code> ou qualquer armazenamento persistente;</li>
-    <li>atribuição de primeira origem entre visitas — o que exigiria
-        armazenamento persistente e, com ele, consentimento prévio.</li>
+    <li>ferramentas de analytics, mapas de calor ou gravação de sessão;</li>
+    <li>identificadores que sigam você entre sites diferentes;</li>
+    <li>venda ou compartilhamento de dados de navegação com terceiros para
+        publicidade.</li>
   </ul>
 
   <h2>3. Parâmetros na URL</h2>
-  <p>Independentemente de qualquer armazenamento, parâmetros UTM presentes na
-     própria URL de acesso são lidos durante a visita e enviados junto ao
-     formulário para identificar a campanha de origem daquele contato. Isso
-     ocorre na navegação corrente, sem gravação persistente.</p>
+  <p>Parâmetros de campanha presentes na própria URL de acesso (UTM,
+     <code>gclid</code>, <code>fbclid</code>, <code>msclkid</code>) são lidos
+     durante a visita e enviados junto ao formulário para identificar a
+     campanha de origem daquele contato. Quando há registro de first-touch
+     (item <code>infinity_utm_first</code>), o formulário recebe também esse
+     valor original, para o CRM distinguir a origem inicial da mais recente.</p>
 
-  <h2>4. Serviços incorporados</h2>
+  <h2>4. Base legal e prazo da atribuição de campanha</h2>
+  <p>O registro <code>infinity_utm_first</code> é tratado com fundamento no
+     <strong>legítimo interesse</strong> do Controlador (art. 7º, IX, da LGPD)
+     em medir a efetividade das campanhas que originam seus contatos
+     comerciais. O tratamento se limita a dados de origem, não sensíveis, que
+     não identificam o titular, e é conservado por no máximo
+     <strong>90 dias</strong>, findos os quais é apagado automaticamente. Esse
+     equilíbrio — atribuição de marketing sem rastreamento de terceiros e sem
+     perfil comportamental — está descrito também na
+     <a href="politica-de-privacidade.html">Política de Privacidade</a>.</p>
+
+  <h2>5. Serviços incorporados</h2>
   <p>O formulário de contato é carregado a partir da plataforma
      <strong>Ploomes</strong>, em um <code>iframe</code>. Esse serviço pode
      utilizar recursos técnicos próprios, necessários ao carregamento e ao
@@ -94,16 +141,25 @@
      modo que o endereço IP do visitante não é transferido a terceiros pela
      simples leitura da página.</p>
 
-  <h2>5. Como remover</h2>
-  <p>Fechar a aba já elimina os itens descritos no item 1. O visitante também
-     pode limpar os dados do site a qualquer momento pelas configurações do
-     navegador, sem qualquer prejuízo à leitura da página.</p>
+  <h2 id="atribuicao-campanha">6. Como desativar ou remover</h2>
+  <p>Fechar a aba elimina os itens de sessão. O registro de campanha
+     (<code>infinity_utm_first</code>) expira sozinho em 90 dias, e você pode
+     removê-lo e impedir novas gravações agora, neste navegador:</p>
+  <p>
+    <button type="button" id="campanha-optout" class="back-link">Desativar atribuição de campanha neste navegador</button>
+  </p>
+  <p id="campanha-optout-status" role="status" class="doc-meta">Para usar o botão acima, ative o JavaScript.</p>
+  <p>A desativação vale por navegador e dispositivo. Você também pode, a
+     qualquer momento, limpar os dados do site pelas configurações do
+     navegador, sem prejuízo à leitura da página. Para exercer os demais
+     direitos previstos na LGPD, fale com o Encarregado:
+     <a href="mailto:dpo@refrisat.com.br">dpo@refrisat.com.br</a>.</p>
 
   <p class="notice">Esta Política descreve exatamente o comportamento da
      versão publicada. A inclusão de qualquer ferramenta de analytics,
-     publicidade ou armazenamento persistente exige, antes da ativação, a
-     revisão deste documento e a implantação de um mecanismo de consentimento
-     compatível com a orientação da ANPD.</p>
+     publicidade ou de armazenamento com identificação do visitante exige,
+     antes da ativação, a revisão deste documento e a implantação de um
+     mecanismo de consentimento compatível com a orientação da ANPD.</p>
 
 </main>
 
@@ -119,5 +175,6 @@
   </div>
 </footer>
 
+<script src="script.js" defer></script>
 </body>
 </html>

@@ -768,6 +768,26 @@ strong,b { font-weight:700; }
   font-size:var(--fs-sm); color:var(--ink-2);
 }
 
+/* Tabela de itens de armazenamento (Política de Cookies) */
+.legal-doc .cookie-table {
+  width:100%; border-collapse:collapse; margin:0 0 var(--sp-4);
+  font-size:var(--fs-sm); display:block; overflow-x:auto;
+}
+.legal-doc .cookie-table th,
+.legal-doc .cookie-table td {
+  border:1px solid var(--line); padding:var(--sp-2) var(--sp-3);
+  text-align:left; vertical-align:top; color:var(--ink-2); line-height:1.6;
+}
+.legal-doc .cookie-table th { background:var(--surface-2); color:var(--ink); font-weight:600; }
+
+/* Botão de oposição à atribuição de campanha */
+.legal-doc #campanha-optout {
+  display:inline-block; padding:.5rem .95rem;
+  border:1px solid var(--blue-700); border-radius:var(--r-sm);
+  color:var(--blue-700); font-size:var(--fs-sm); font-weight:600;
+}
+.legal-doc #campanha-optout:hover { background:var(--blue-700); color:#fff; }
+
 /* Rodapé enxuto das páginas legais */
 .legal-footer {
   border-top:1px solid var(--line); background:var(--surface);

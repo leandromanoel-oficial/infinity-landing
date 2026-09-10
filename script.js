@@ -64,10 +64,16 @@
   }
 
   /* ---------------------------------------------------------------------
-     3. Formulário Ploomes — UTMs, origem do CTA e plano de interesse
+     3. Formulário Ploomes — atribuição de campanha (UTM), origem do CTA
      ------------------------------------------------------------------ */
   const FORM_BASE = 'https://forms.ploomes.com/form/4e3b3aabeecc45ac935a021d79d59610';
   const UTM_KEYS  = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+  const CLICK_IDS = ['gclid', 'fbclid', 'msclkid'];
+  const CAMPAIGN_KEYS = [...UTM_KEYS, ...CLICK_IDS];
+
+  const FIRST_KEY  = 'infinity_utm_first';    // first-touch persistente (localStorage)
+  const OPTOUT_KEY = 'infinity_utm_optout';   // oposição do visitante (localStorage)
+  const TTL_MS     = 90 * 24 * 60 * 60 * 1000; // 90 dias
 
   const frame     = $('#ploomes-form');
   const skeleton  = $('#form-skeleton');
@@ -75,27 +81,72 @@
 
   const store = {
     get(area, key) { try { return JSON.parse(area.getItem(key) || '{}'); } catch { return {}; } },
-    set(area, key, value) { try { area.setItem(key, JSON.stringify(value)); } catch { /* modo privado */ } }
+    set(area, key, value) { try { area.setItem(key, JSON.stringify(value)); } catch { /* modo privado / sem espaço */ } },
+    del(area, key) { try { area.removeItem(key); } catch { /* ignore */ } }
   };
 
-  /* Captura de UTM — escopo de sessão apenas.
-     Nada é gravado em localStorage: o armazenamento persistente exigiria
-     banner de consentimento, e a atribuição de primeira origem entre visitas
-     foi deliberadamente abandonada em favor de uma página sem banner.
-     sessionStorage é descartado ao fechar a aba. */
-  const params  = new URLSearchParams(location.search);
-  const current = {};
-  UTM_KEYS.forEach(k => { const v = params.get(k); if (v) current[k] = v.slice(0, 180); });
+  const optedOut = () => { try { return localStorage.getItem(OPTOUT_KEY) === '1'; } catch { return false; } };
 
-  if (Object.keys(current).length) {
-    store.set(sessionStorage, 'infinity_utm_current', current);
+  /* Oposição ao tratamento (LGPD Art. 9º/18): apaga a atribuição persistida e
+     impede novas gravações. Exposto para o botão da Política de Cookies. */
+  window.infinityCampanhaOptOut = () => {
+    try { localStorage.setItem(OPTOUT_KEY, '1'); } catch { /* ignore */ }
+    store.del(localStorage, FIRST_KEY);
+    return true;
+  };
+  window.infinityCampanhaOptIn = () => { store.del(localStorage, OPTOUT_KEY); return true; };
+  window.infinityCampanhaStatus = () => (optedOut() ? 'opt-out' : 'ativo');
+
+  /* Parâmetros de campanha da URL atual (last-touch). */
+  const params  = new URLSearchParams(location.search);
+  const fromUrl = {};
+  CAMPAIGN_KEYS.forEach(k => { const v = params.get(k); if (v) fromUrl[k] = v.slice(0, 180); });
+
+  /* last-touch — escopo de sessão, descartado ao fechar a aba. */
+  if (Object.keys(fromUrl).length) {
+    store.set(sessionStorage, 'infinity_utm_current', fromUrl);
+  }
+
+  /* first-touch — escopo persistente (localStorage), TTL de 90 dias.
+     Base legal: legítimo interesse (LGPD Art. 7º, IX) para creditar o lead à
+     campanha que o originou, mesmo que ele volte dias depois por acesso direto
+     ou orgânico. Não identifica a pessoa, não é cookie de terceiro, não há
+     perfil comportamental nem compartilhamento para publicidade. O visitante
+     pode se opor pelo link na Política de Cookies (infinityCampanhaOptOut). */
+  const now = Date.now();
+  let first = store.get(localStorage, FIRST_KEY);
+  if (first && first.expires && now > first.expires) {
+    first = {};
+    store.del(localStorage, FIRST_KEY);
+  }
+  if (optedOut()) {
+    first = {};
+    store.del(localStorage, FIRST_KEY);
+  } else if (Object.keys(fromUrl).length && !(first && first.params)) {
+    first = {
+      params:     fromUrl,
+      first_seen: new Date(now).toISOString().slice(0, 10),
+      referrer:   (document.referrer || '').slice(0, 300),
+      expires:    now + TTL_MS
+    };
+    store.set(localStorage, FIRST_KEY, first);
   }
 
   const buildFormUrl = (intent = {}) => {
     const q = new URLSearchParams({ iframe: 'true' });
-    const cur = store.get(sessionStorage, 'infinity_utm_current');
+    const current      = store.get(sessionStorage, 'infinity_utm_current');
+    const firstParams  = (first && first.params) || {};
 
-    UTM_KEYS.forEach(k => { if (cur[k]) q.set(k, cur[k]); });
+    /* Efetivo: last-touch da visita atual; se ausente, o first-touch persistido. */
+    CAMPAIGN_KEYS.forEach(k => {
+      const v = current[k] || firstParams[k];
+      if (v) q.set(k, v);
+    });
+    /* Snapshot do first-touch, para o CRM distinguir origem inicial x recente. */
+    UTM_KEYS.forEach(k => { if (firstParams[k]) q.set(k + '_first', firstParams[k]); });
+    if (first && first.first_seen) q.set('utm_first_seen', first.first_seen);
+    if (first && first.referrer)   q.set('utm_first_referrer', first.referrer);
+
     Object.entries(intent).forEach(([k, v]) => { if (v) q.set(k, v); });
 
     q.set('landing_page', 'Infinity System');
@@ -171,7 +222,32 @@
   }
 
   /* ---------------------------------------------------------------------
-     6. Detalhes
+     6. Oposição à atribuição de campanha — botão da Política de Cookies
+     ------------------------------------------------------------------ */
+  const optoutBtn = $('#campanha-optout');
+  if (optoutBtn) {
+    const statusEl = $('#campanha-optout-status');
+    const render = () => {
+      const off = optedOut();
+      optoutBtn.textContent = off
+        ? 'Reativar atribuição de campanha'
+        : 'Desativar atribuição de campanha neste navegador';
+      if (statusEl) {
+        statusEl.textContent = off
+          ? 'Atribuição de campanha desativada neste navegador. Nenhum dado de origem é guardado.'
+          : 'Atribuição de campanha ativa: a origem da sua primeira visita fica guardada por até 90 dias neste navegador.';
+      }
+    };
+    optoutBtn.addEventListener('click', () => {
+      if (optedOut()) window.infinityCampanhaOptIn();
+      else window.infinityCampanhaOptOut();
+      render();
+    });
+    render();
+  }
+
+  /* ---------------------------------------------------------------------
+     7. Detalhes
      ------------------------------------------------------------------ */
   const year = $('#ano');
   if (year) year.textContent = String(new Date().getFullYear());

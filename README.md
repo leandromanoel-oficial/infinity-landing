@@ -58,10 +58,14 @@ O `script.js` acrescenta à URL do iframe, quando disponíveis:
 
 | Parâmetro | Origem |
 |---|---|
-| `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term` | query string da visita atual (sessionStorage — ver *Páginas legais*) |
+| `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `gclid`, `fbclid`, `msclkid` | **efetivo**: last-touch da visita (sessionStorage) com fallback para o first-touch persistido |
+| `utm_source_first`, `utm_medium_first`, `utm_campaign_first`, `utm_content_first`, `utm_term_first` | snapshot do **first-touch** (`localStorage` `infinity_utm_first`, TTL 90 dias) |
+| `utm_first_seen`, `utm_first_referrer` | data e referrer da primeira visita |
 | `origem_cta` | qual botão foi clicado (`hero_principal`, `plano_energy`, …) |
 | `plano_interesse` | plano do card clicado |
 | `landing_page`, `page_url` | fixos |
+
+Mapeamento completo desses campos no formulário do Ploomes: **`deploy/UTM-PERSISTENTE.md`**.
 
 ### Comportamento do iframe
 
@@ -109,37 +113,44 @@ Consequência: se a Refrisat publicar uma política corporativa no futuro, estes
 documentos precisam ser reconciliados com ela. Duas políticas do mesmo
 controlador dizendo coisas diferentes é pior do que uma só.
 
-### Decisão sobre consentimento
+### Decisão sobre consentimento (revista em 10/09/2026)
 
-A versão anterior da Política de Cookies descrevia um "banner de privacidade"
-com escolha de medição. Esse banner nunca existiu, e o `script.js` gravava a
-primeira origem (`infinity_utm_first`) em `localStorage` sem pedir nada — o
-texto contradizia o comportamento.
+Histórico: a Política de Cookies chegou a descrever um "banner de privacidade"
+que nunca existiu; em 03/09/2026 optou-se por **eliminar o `localStorage`** e
+usar só `sessionStorage`, dispensando banner — ao custo de perder a atribuição
+de primeira origem entre visitas.
 
-Optou-se por **eliminar o armazenamento persistente** em vez de construir o
-banner:
+**Em 10/09/2026 o first-touch persistente foi reintroduzido** a pedido do
+Leandro, para dar base a decisões de verba de mídia. Modelo:
 
-- o `script.js` usa apenas `sessionStorage` (`infinity_utm_current` e
-  `infinity_cta_context`), descartado ao fechar a aba;
-- não há `localStorage`, cookie de terceiro, analytics ou pixel;
-- sem armazenamento não necessário, não há consentimento a coletar, e a
-  landing dispensa banner.
+- `localStorage` `infinity_utm_first` — origem da **primeira** visita (UTMs,
+  `gclid`/`fbclid`/`msclkid`, referrer), **TTL de 90 dias**, expira sozinho;
+- `localStorage` `infinity_utm_optout` — registra a oposição do visitante;
+- **base legal:** legítimo interesse (LGPD Art. 7º, IX) — dado de origem, não
+  identifica a pessoa, sem cookie de terceiro, sem perfil comportamental, sem
+  rastreio entre sites;
+- **em vez de banner:** opt-out. Botão `#campanha-optout` na Política de
+  Cookies chama `window.infinityCampanhaOptOut()`, que apaga o registro e
+  bloqueia novas gravações. Por isso `politica-de-cookies.html` passou a
+  carregar `script.js` (`defer`).
 
-**O que se perdeu:** atribuição de primeira origem entre visitas. Se o lead
-chega por um anúncio, sai e volta depois pelo orgânico para converter, a
-campanha original não é mais creditada — o formulário recebe apenas os UTMs da
-visita em que houve conversão. Reverter essa decisão implica reintroduzir o
-`localStorage`, construir o banner de consentimento com gate no script e
-reescrever a Política de Cookies.
+**Pendência:** chancela do DPO (`dpo@refrisat.com.br`) sobre o legítimo
+interesse. Se exigir consentimento, trocar o opt-out por gate de opt-in — a
+gravação persistente está isolada num único ponto do `script.js`.
+
+Mapeamento dos parâmetros no CRM: `deploy/UTM-PERSISTENTE.md`.
 
 ### Ao editar
 
 - As três páginas usam o mesmo `styles.css` (bloco `PÁGINAS LEGAIS` ao final) e
   reaproveitam as classes de marca do cabeçalho (`.brand`, `.brand-mark`,
   `.brand-by`, `.brand-refrisat`).
-- Não têm JavaScript.
-- A Política de Cookies descreve o comportamento real do `script.js`. Qualquer
-  mudança no armazenamento do script exige uma mudança correspondente ali.
+- Só a **Política de Cookies** carrega JavaScript (`script.js`, `defer`), e
+  apenas para o botão de opt-out `#campanha-optout`. Privacidade e Termos não
+  têm script.
+- As Políticas de Cookies **e** de Privacidade descrevem o comportamento real
+  do `script.js`. Qualquer mudança no armazenamento do script exige mudança
+  correspondente nos dois documentos.
 
 ---
 
@@ -383,9 +394,16 @@ manutenção de longo prazo.
 2. CTA de cada plano → mesmo `#contato`, com `plano_interesse` correto.
 3. Preencher parcialmente o formulário, clicar em outro CTA e confirmar que
    **os dados não são apagados**.
-4. UTMs permanecem na URL do iframe (inspecionar o elemento) e **nada** é
-   gravado em `localStorage` (DevTools → Application → Local Storage vazio).
-5. Envio real e conferência dos campos no Ploomes.
+4. Atribuição persistente:
+   a. abrir `?utm_source=teste&utm_campaign=abc&gclid=xyz` → conferir
+      `localStorage.infinity_utm_first` gravado com `expires` ~90 dias à frente;
+   b. fechar a aba, reabrir a landing **sem** parâmetros → a URL do iframe ainda
+      leva `utm_source=teste` (efetivo, via fallback) e `utm_source_first=teste`;
+   c. Política de Cookies → botão "Desativar atribuição de campanha" → o item
+      `infinity_utm_first` some e `infinity_utm_optout=1` aparece; recarregar a
+      landing com UTM na URL → nada é persistido em `localStorage`;
+   d. botão "Reativar" → volta a persistir.
+5. Envio real e conferência dos campos no Ploomes (ver `deploy/UTM-PERSISTENTE.md`).
 6. Responsividade em 1920, 1440, 1366, 1024, tablet e celular.
 7. Chrome, Edge, Firefox e Safari/iOS.
 8. Navegação apenas por teclado (Tab) do topo ao rodapé.
